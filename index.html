@@ -1,0 +1,2038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industrial AI Intelligence | Uniphore BAIC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --uni-teal: #179DAB;
+      --uni-blue: #2973C3;
+      --uni-dark: #4C4E56;
+      --uni-white: #FFFFFF;
+      --uni-gold: #CC963F;
+      --uni-green: #37AD68;
+      --uni-purple: #652E8B;
+      --uni-black: #242529;
+      --uni-gray: #919399;
+      --uni-light-gray: #C7CAD4;
+      --uni-gradient-data: linear-gradient(135deg, #1D568F, #2973C3);
+      --uni-gradient-cognitive: linear-gradient(135deg, #2973C3, #37AD68);
+      --uni-gradient-sovereign: linear-gradient(135deg, #652E8B, #1b9EAD);
+      --uni-gradient-hero: linear-gradient(135deg, #1a1c2e 0%, #1D568F 50%, #179DAB 100%);
+      --uni-red: #C92037;
+      --card-bg: #2a2c35;
+      --surface: #1e2029;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--uni-black);
+      color: var(--uni-white);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(26,27,34,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(41,115,195,0.25);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2.5rem; height: 64px;
+    }
+    .nav-logo {
+      font-size: 1.3rem; font-weight: 700; letter-spacing: -0.5px;
+      background: linear-gradient(90deg, #2973C3, #37AD68);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-logo span { color: var(--uni-white); -webkit-text-fill-color: var(--uni-white); font-weight: 300; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--uni-light-gray); text-decoration: none; font-size: 0.9rem; font-weight: 500;
+      transition: color 0.2s; letter-spacing: 0.3px;
+    }
+    .nav-links a:hover { color: var(--uni-teal); }
+    .nav-badge {
+      background: var(--uni-gradient-data);
+      color: white; font-size: 0.75rem; font-weight: 700;
+      padding: 0.35rem 1rem; border-radius: 20px; letter-spacing: 0.5px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--uni-gradient-hero);
+      padding: 5rem 2.5rem 4rem;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(41,115,195,0.3) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-label {
+      display: inline-block;
+      background: rgba(41,115,195,0.25);
+      border: 1px solid rgba(41,115,195,0.5);
+      color: var(--uni-teal); font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      padding: 0.4rem 1.2rem; border-radius: 20px; margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700;
+      line-height: 1.1; margin-bottom: 1.25rem;
+      background: linear-gradient(135deg, #fff 30%, #86F3FC);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero p {
+      font-size: 1.15rem; color: rgba(255,255,255,0.75);
+      max-width: 680px; margin: 0 auto 2.5rem; font-weight: 300;
+    }
+    .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 2rem; border-radius: 8px; font-family: inherit;
+      font-size: 0.95rem; font-weight: 700; cursor: pointer;
+      text-decoration: none; transition: all 0.2s; border: none;
+    }
+    .btn-primary {
+      background: var(--uni-gradient-data); color: white;
+      box-shadow: 0 4px 20px rgba(41,115,195,0.4);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(41,115,195,0.5); }
+    .btn-outline {
+      background: transparent; color: white;
+      border: 1.5px solid rgba(255,255,255,0.35);
+    }
+    .btn-outline:hover { border-color: var(--uni-teal); color: var(--uni-teal); }
+    .hero-stats {
+      display: flex; justify-content: center; gap: 3rem;
+      margin-top: 3.5rem; flex-wrap: wrap;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat .value { font-size: 2rem; font-weight: 700; color: var(--uni-teal); }
+    .hero-stat .label { font-size: 0.8rem; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 2.5rem; max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--uni-teal);
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 700;
+      margin-bottom: 0.75rem; color: white;
+    }
+    .section-sub {
+      color: var(--uni-gray); font-size: 1rem; margin-bottom: 3rem;
+      max-width: 640px; font-weight: 300;
+    }
+
+    /* ── USE CASE CARDS ── */
+    .use-cases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .uc-card {
+      background: var(--card-bg); border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 2rem; position: relative; overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .uc-card:hover { border-color: rgba(41,115,195,0.4); transform: translateY(-3px); }
+    .uc-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .uc-card.energy::before { background: var(--uni-gradient-cognitive); }
+    .uc-card.air::before { background: var(--uni-gradient-sovereign); }
+    .uc-icon {
+      width: 52px; height: 52px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin-bottom: 1.25rem;
+    }
+    .uc-icon.energy { background: rgba(41,115,195,0.15); }
+    .uc-icon.air { background: rgba(101,46,139,0.15); }
+    .uc-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.75rem; }
+    .uc-card p { font-size: 0.9rem; color: var(--uni-gray); line-height: 1.6; margin-bottom: 1.5rem; }
+    .uc-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.5px;
+      padding: 0.3rem 0.8rem; border-radius: 20px;
+      text-transform: uppercase;
+    }
+    .tag-blue { background: rgba(41,115,195,0.15); color: #93C4F5; border: 1px solid rgba(41,115,195,0.25); }
+    .tag-teal { background: rgba(23,157,171,0.15); color: #3CD0DE; border: 1px solid rgba(23,157,171,0.25); }
+    .tag-purple { background: rgba(101,46,139,0.15); color: #C6A1E3; border: 1px solid rgba(101,46,139,0.25); }
+    .tag-green { background: rgba(55,173,104,0.15); color: #6BE39B; border: 1px solid rgba(55,173,104,0.25); }
+    .tag-gold { background: rgba(204,150,63,0.15); color: #E8BF7D; border: 1px solid rgba(204,150,63,0.25); }
+
+    /* ── BAIC ARCHITECTURE ── */
+    .baic-section { background: var(--surface); border-radius: 24px; padding: 3rem; margin: 0; }
+    .baic-layers {
+      display: flex; flex-direction: column; gap: 1px;
+      border-radius: 12px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.07);
+      margin-top: 2rem;
+    }
+    .baic-layer {
+      display: grid; grid-template-columns: 200px 1fr 1fr;
+      align-items: stretch; min-height: 90px;
+    }
+    .layer-label {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 1rem 1.5rem; font-weight: 700; font-size: 0.85rem;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .layer-label .layer-name { font-size: 0.95rem; margin-bottom: 0.2rem; }
+    .layer-label .layer-sub { font-size: 0.72rem; font-weight: 400; opacity: 0.7; text-transform: none; letter-spacing: 0; }
+    .layer-agentic .layer-label { background: linear-gradient(135deg, rgba(101,46,139,0.5), rgba(41,115,195,0.5)); }
+    .layer-model .layer-label { background: linear-gradient(135deg, rgba(41,115,195,0.4), rgba(23,157,171,0.4)); }
+    .layer-knowledge .layer-label { background: linear-gradient(135deg, rgba(23,157,171,0.3), rgba(55,173,104,0.3)); }
+    .layer-data .layer-label { background: linear-gradient(135deg, rgba(55,173,104,0.25), rgba(23,157,171,0.25)); }
+    .layer-content {
+      padding: 1rem 1.5rem; background: rgba(255,255,255,0.03);
+      border-left: 1px solid rgba(255,255,255,0.06);
+    }
+    .layer-content .content-label {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; margin-bottom: 0.5rem; opacity: 0.6;
+    }
+    .layer-content .content-items {
+      display: flex; flex-wrap: wrap; gap: 0.4rem;
+    }
+    .content-chip {
+      font-size: 0.75rem; padding: 0.25rem 0.7rem; border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.04);
+    }
+    .layer-agentic .content-chip { border-color: rgba(101,46,139,0.4); color: #C6A1E3; }
+    .layer-model .content-chip { border-color: rgba(41,115,195,0.4); color: #93C4F5; }
+    .layer-knowledge .content-chip { border-color: rgba(23,157,171,0.4); color: #3CD0DE; }
+    .layer-data .content-chip { border-color: rgba(55,173,104,0.4); color: #6BE39B; }
+
+    /* ── TABS ── */
+    .tab-nav {
+      display: flex; gap: 0; border-bottom: 2px solid rgba(255,255,255,0.08);
+      margin-bottom: 2.5rem;
+    }
+    .tab-btn {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 1rem 1.75rem; background: none; border: none;
+      color: var(--uni-gray); font-family: inherit; font-size: 0.95rem;
+      font-weight: 700; cursor: pointer; letter-spacing: 0.3px;
+      border-bottom: 2px solid transparent; margin-bottom: -2px;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { color: white; }
+    .tab-btn.active { color: white; border-bottom-color: var(--uni-blue); }
+    .tab-btn .tab-icon { font-size: 1.1rem; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ── KPI CARDS ── */
+    .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .kpi {
+      background: var(--card-bg); border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 1.25rem 1.5rem;
+    }
+    .kpi .kpi-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--uni-gray); margin-bottom: 0.5rem; }
+    .kpi .kpi-value { font-size: 1.8rem; font-weight: 700; line-height: 1; }
+    .kpi .kpi-sub { font-size: 0.78rem; color: var(--uni-gray); margin-top: 0.35rem; }
+    .kpi .kpi-trend { font-size: 0.75rem; font-weight: 700; margin-top: 0.35rem; }
+    .kpi-blue .kpi-value { color: #93C4F5; }
+    .kpi-teal .kpi-value { color: var(--uni-teal); }
+    .kpi-green .kpi-value { color: var(--uni-green); }
+    .kpi-gold .kpi-value { color: var(--uni-gold); }
+    .kpi-red .kpi-value { color: var(--uni-red); }
+    .trend-up { color: var(--uni-green); }
+    .trend-down { color: var(--uni-red); }
+
+    /* ── CHART ── */
+    .chart-card {
+      background: var(--card-bg); border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 1.5rem 1.75rem; margin-bottom: 2rem;
+    }
+    .chart-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+    .chart-title { font-size: 0.95rem; font-weight: 700; }
+    .chart-subtitle { font-size: 0.8rem; color: var(--uni-gray); margin-top: 0.2rem; }
+    .chart-legend { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: var(--uni-gray); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .chart-wrap { position: relative; height: 240px; }
+
+    /* ── ANOMALY BADGE ── */
+    .anomaly-alert {
+      background: rgba(201,32,55,0.1); border: 1px solid rgba(201,32,55,0.35);
+      border-radius: 10px; padding: 1rem 1.25rem;
+      display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 2rem;
+    }
+    .anomaly-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .anomaly-title { font-size: 0.85rem; font-weight: 700; color: #ff6b7a; margin-bottom: 0.25rem; }
+    .anomaly-body { font-size: 0.82rem; color: rgba(255,255,255,0.65); line-height: 1.5; }
+    .anomaly-badge {
+      display: inline-block; background: var(--uni-red); color: white;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 1px;
+      padding: 0.15rem 0.6rem; border-radius: 4px; text-transform: uppercase; margin-left: 0.5rem;
+    }
+
+    /* ── AGENT GRID ── */
+    .agents-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--uni-gray); margin-bottom: 1rem; }
+    .agents-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .agent-card {
+      background: var(--card-bg); border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 1.25rem; display: flex; gap: 1rem;
+      transition: border-color 0.2s;
+    }
+    .agent-card:hover { border-color: rgba(41,115,195,0.35); }
+    .agent-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; flex-shrink: 0;
+    }
+    .agent-body {}
+    .agent-name { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .agent-layer {
+      font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.8px; margin-bottom: 0.5rem;
+    }
+    .agent-desc { font-size: 0.78rem; color: var(--uni-gray); line-height: 1.5; }
+    .agent-type {
+      display: inline-block; font-size: 0.65rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      padding: 0.2rem 0.6rem; border-radius: 4px; margin-top: 0.5rem;
+    }
+    .type-unitary { background: rgba(41,115,195,0.2); color: #93C4F5; }
+    .type-multi { background: rgba(101,46,139,0.2); color: #C6A1E3; }
+
+    /* ── WORKFLOW ── */
+    .workflow-section { background: var(--surface); border-radius: 24px; padding: 3rem; }
+    .workflow-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 2rem; }
+    .workflow-flow {
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .workflow-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 1.25rem; color: var(--uni-light-gray); }
+    .flow-step {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 0.75rem 0;
+      position: relative;
+    }
+    .flow-step:not(:last-child)::after {
+      content: '';
+      position: absolute; left: 18px; top: 44px; bottom: 0; width: 2px;
+      background: rgba(255,255,255,0.1);
+    }
+    .flow-node {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; flex-shrink: 0; font-weight: 700; z-index: 1;
+    }
+    .flow-node.trigger { background: rgba(201,32,55,0.25); border: 2px solid var(--uni-red); color: #ff6b7a; }
+    .flow-node.process { background: rgba(41,115,195,0.25); border: 2px solid var(--uni-blue); color: #93C4F5; }
+    .flow-node.hitl { background: rgba(204,150,63,0.25); border: 2px solid var(--uni-gold); color: var(--uni-gold); }
+    .flow-node.complete { background: rgba(55,173,104,0.25); border: 2px solid var(--uni-green); color: var(--uni-green); }
+    .flow-info {}
+    .flow-step-name { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .flow-step-desc { font-size: 0.78rem; color: var(--uni-gray); line-height: 1.4; }
+    .hitl-badge {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      background: rgba(204,150,63,0.15); border: 1px solid rgba(204,150,63,0.35);
+      color: var(--uni-gold); font-size: 0.65rem; font-weight: 700;
+      padding: 0.15rem 0.5rem; border-radius: 4px; text-transform: uppercase; margin-left: 0.5rem;
+    }
+
+    /* ── IMPACT ── */
+    .impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+    .impact-card {
+      background: var(--card-bg); border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.07);
+      padding: 2rem; text-align: center;
+    }
+    .impact-num { font-size: 2.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .impact-num.blue { color: #93C4F5; }
+    .impact-num.green { color: var(--uni-green); }
+    .impact-num.teal { color: var(--uni-teal); }
+    .impact-desc { font-size: 0.85rem; color: var(--uni-gray); line-height: 1.5; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface); border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 2rem 2.5rem; text-align: center;
+    }
+    .footer-logo {
+      font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;
+      background: linear-gradient(90deg, #2973C3, #37AD68);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      display: inline-block;
+    }
+    footer p { font-size: 0.8rem; color: var(--uni-gray); }
+    footer .footer-tagline { font-size: 0.75rem; color: rgba(255,255,255,0.3); margin-top: 0.5rem; }
+
+    /* ── DIVIDER ── */
+    .divider { display: none; }
+
+    /* ── SPA SECTION VISIBILITY ── */
+    .page-section { display: none; }
+    .page-section.section-active { display: block; }
+    .nav-links a.nav-active { color: var(--uni-teal) !important; }
+
+    /* ── LIVE DEMO INTERACTIVE ── */
+    @keyframes livePulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(1.8)} }
+    @keyframes kpiFlash { 0%,30%{color:#37AD68} 100%{color:inherit} }
+    @keyframes leakGlow { 0%,100%{box-shadow:0 0 0 0 rgba(201,32,55,0)} 50%{box-shadow:0 0 0 8px rgba(201,32,55,0.25)} }
+    .live-bar { display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap; padding:0.65rem 1rem; border-radius:10px; margin-bottom:1.5rem; background:rgba(55,173,104,0.06); border:1px solid rgba(55,173,104,0.18); }
+    .live-dot { width:8px; height:8px; border-radius:50%; background:#37AD68; flex-shrink:0; animation:livePulse 1.8s ease-in-out infinite; }
+    .live-status { font-size:0.7rem; font-weight:700; color:#37AD68; text-transform:uppercase; letter-spacing:1.5px; }
+    .live-clock { font-size:0.75rem; color:var(--uni-gray); }
+    .live-spacer { flex:1; min-width:0.5rem; }
+    .filter-group { display:flex; align-items:center; gap:0.4rem; flex-wrap:wrap; }
+    .filter-label { font-size:0.68rem; font-weight:700; color:var(--uni-gray); text-transform:uppercase; letter-spacing:0.5px; }
+    .f-btn { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1); color:var(--uni-gray); font-family:inherit; font-size:0.72rem; font-weight:700; padding:0.26rem 0.62rem; border-radius:6px; cursor:pointer; transition:all 0.15s; }
+    .f-btn:hover { border-color:rgba(41,115,195,0.4); color:white; }
+    .f-btn.active { background:rgba(41,115,195,0.2); border-color:rgba(41,115,195,0.4); color:#93C4F5; }
+    .charts-2col { display:grid; grid-template-columns:3fr 2fr; gap:1rem; margin-bottom:1rem; }
+    .toggle-row { display:flex; align-items:center; gap:0.45rem; flex-wrap:wrap; margin-bottom:1.25rem; }
+    .toggle-row-lbl { font-size:0.68rem; font-weight:700; color:var(--uni-gray); text-transform:uppercase; letter-spacing:0.8px; }
+    .t-pill { display:inline-flex; align-items:center; gap:0.35rem; padding:0.26rem 0.7rem; border-radius:20px; border:1.5px solid; font-family:inherit; font-size:0.72rem; font-weight:700; cursor:pointer; transition:all 0.15s; user-select:none; background:transparent; }
+    .t-pill .pip { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+    .t-pill.off { opacity:0.3; }
+    .simulate-wrap { display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap; margin-bottom:1.25rem; }
+    .simulate-btn { display:inline-flex; align-items:center; gap:0.5rem; padding:0.5rem 1.25rem; border-radius:8px; font-family:inherit; font-size:0.82rem; font-weight:700; cursor:pointer; transition:all 0.2s; background:rgba(201,32,55,0.1); border:1.5px solid rgba(201,32,55,0.3); color:#ff8a94; }
+    .simulate-btn:hover { background:rgba(201,32,55,0.2); }
+    .simulate-btn.running { background:rgba(201,32,55,0.22); border-color:var(--uni-red); animation:leakGlow 1.2s ease-in-out infinite; }
+    .m-tabs { display:flex; gap:0.4rem; }
+    .m-tab { padding:0.26rem 0.78rem; border-radius:6px; border:1px solid rgba(255,255,255,0.1); background:transparent; color:var(--uni-gray); font-family:inherit; font-size:0.72rem; font-weight:700; cursor:pointer; transition:all 0.15s; }
+    .m-tab:hover { color:white; }
+    .m-tab.active { background:rgba(101,46,139,0.2); border-color:rgba(101,46,139,0.4); color:#C6A1E3; }
+    .kpi-value.flash { animation:kpiFlash 0.9s ease-out; }
+    .chart-wrap-sm { position:relative; height:180px; }
+
+    /* ── THRESHOLD BREACH STATES ── */
+    @keyframes kpiFlashHi { 0%,45%{color:#ff6b7a;text-shadow:0 0 14px rgba(201,32,55,0.7)} 100%{color:inherit;text-shadow:none} }
+    @keyframes kpiFlashLo { 0%,45%{color:#E8BF7D;text-shadow:0 0 14px rgba(204,150,63,0.6)} 100%{color:inherit;text-shadow:none} }
+    @keyframes badgePulse { 0%,100%{opacity:1} 50%{opacity:0.45} }
+    @keyframes evSlide { from{opacity:0;transform:translateX(14px)} to{opacity:1;transform:translateX(0)} }
+    .kpi-value.flash-hi { animation:kpiFlashHi 2.2s ease-out; }
+    .kpi-value.flash-lo { animation:kpiFlashLo 2.2s ease-out; }
+
+    .alarm-badge { display:inline-flex; align-items:center; padding:0.22rem 0.65rem; border-radius:20px; font-size:0.65rem; font-weight:700; letter-spacing:0.8px; text-transform:uppercase; transition:all 0.3s; }
+    .alarm-badge.alarm-ok { background:rgba(55,173,104,0.12); border:1px solid rgba(55,173,104,0.3); color:#6BE39B; }
+    .alarm-badge.alarm-on { background:rgba(201,32,55,0.18); border:1px solid rgba(201,32,55,0.5); color:#ff8a94; animation:badgePulse 1s ease-in-out infinite; }
+
+    /* ── AGENT EVENT LOG ── */
+    .ev-log { background:rgba(255,255,255,0.015); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:0.75rem 0.9rem; margin-bottom:1.25rem; max-height:150px; overflow-y:auto; }
+    .ev-log-hdr { font-size:0.66rem; font-weight:700; color:var(--uni-gray); text-transform:uppercase; letter-spacing:1.2px; margin-bottom:0.55rem; display:flex; align-items:center; gap:0.4rem; }
+    .ev-row { display:flex; align-items:flex-start; gap:0.6rem; padding:0.32rem 0; font-size:0.75rem; line-height:1.45; border-bottom:1px solid rgba(255,255,255,0.03); animation:evSlide 0.4s ease-out; }
+    .ev-row:last-child { border-bottom:none; }
+    .ev-time { color:var(--uni-gray); font-size:0.68rem; font-variant-numeric:tabular-nums; flex-shrink:0; padding-top:1px; }
+    .ev-dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; margin-top:6px; }
+    .ev-msg { color:#C7CAD4; }
+    .ev-msg b { color:#fff; font-weight:700; }
+    .ev-crit .ev-dot { background:#C92037; box-shadow:0 0 6px rgba(201,32,55,0.8); }
+    .ev-crit .ev-msg { color:#ffb3ba; }
+    .ev-warn .ev-dot { background:#CC963F; box-shadow:0 0 6px rgba(204,150,63,0.7); }
+    .ev-warn .ev-msg { color:#E8BF7D; }
+    .ev-ok .ev-dot { background:#37AD68; }
+    .ev-click { cursor:pointer; border-radius:6px; transition:background 0.15s; }
+    .ev-click:hover { background:rgba(255,255,255,0.05); }
+    .ev-more { display:inline-block; margin-left:0.5rem; font-size:0.66rem; font-weight:700; color:#3CD0DE; opacity:0.75; white-space:nowrap; }
+    .ev-click:hover .ev-more { opacity:1; text-decoration:underline; }
+
+    /* ══ BREACH DIAGNOSTIC DRAWER ══ */
+    #ddScrim { position:fixed; inset:0; background:rgba(10,11,15,0.55); backdrop-filter:blur(2px); opacity:0; pointer-events:none; transition:opacity 0.28s; z-index:900; }
+    #ddScrim.open { opacity:1; pointer-events:auto; }
+    #detailDrawer { position:fixed; top:0; right:0; height:100vh; width:min(520px, 94vw); background:#1a1c24;
+      border-left:1px solid rgba(255,255,255,0.09); box-shadow:-24px 0 60px rgba(0,0,0,0.55);
+      transform:translateX(102%); transition:transform 0.34s cubic-bezier(.22,.9,.3,1); z-index:901;
+      display:flex; flex-direction:column; }
+    #detailDrawer.open { transform:translateX(0); }
+    .dd-head { display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; padding:1.25rem 1.5rem 1rem;
+      border-bottom:1px solid rgba(255,255,255,0.07); background:linear-gradient(135deg, rgba(41,115,195,0.12), transparent); flex-shrink:0; }
+    .dd-eyebrow { font-size:0.62rem; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:var(--uni-teal); margin-bottom:0.25rem; }
+    .dd-title { font-size:1.05rem; font-weight:700; color:#fff; }
+    .dd-close { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.12); color:var(--uni-gray);
+      width:30px; height:30px; border-radius:8px; cursor:pointer; font-size:0.85rem; flex-shrink:0; transition:all 0.15s; }
+    .dd-close:hover { background:rgba(201,32,55,0.2); border-color:rgba(201,32,55,0.5); color:#ff8a94; }
+    #dd-body { flex:1; overflow-y:auto; padding:1.25rem 1.5rem 2.5rem; }
+    #dd-body::-webkit-scrollbar { width:8px; }
+    #dd-body::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.12); border-radius:4px; }
+
+    .dd-hero { border:1px solid; border-radius:12px; padding:1.1rem 1.2rem; margin-bottom:1.5rem; }
+    .dd-sev { display:inline-block; padding:0.22rem 0.7rem; border-radius:20px; font-size:0.63rem; font-weight:700;
+      letter-spacing:1px; text-transform:uppercase; margin-bottom:0.7rem; }
+    .dd-val { font-size:2.3rem; font-weight:700; line-height:1; margin-bottom:0.4rem; }
+    .dd-val span { font-size:1rem; opacity:0.65; font-weight:400; }
+    .dd-dev { font-size:0.82rem; color:#C7CAD4; margin-bottom:0.35rem; }
+    .dd-when { font-size:0.72rem; color:var(--uni-gray); }
+
+    .dd-sec { font-size:0.68rem; font-weight:700; letter-spacing:1.3px; text-transform:uppercase; color:var(--uni-teal);
+      margin:1.6rem 0 0.75rem; padding-bottom:0.45rem; border-bottom:1px solid rgba(255,255,255,0.07); }
+    .dd-sec:first-of-type { margin-top:0; }
+    .dd-row { display:grid; grid-template-columns:38% 1fr; gap:0.75rem; padding:0.42rem 0; font-size:0.79rem;
+      border-bottom:1px solid rgba(255,255,255,0.035); align-items:start; }
+    .dd-row:last-child { border-bottom:none; }
+    .dd-k { color:var(--uni-gray); font-size:0.74rem; }
+    .dd-v { color:#DDE0E8; line-height:1.45; }
+    .dd-v strong { color:#fff; }
+    .dd-tag { display:inline-block; padding:0.1rem 0.45rem; border-radius:4px; background:rgba(23,157,171,0.18);
+      border:1px solid rgba(23,157,171,0.35); color:#3CD0DE; font-size:0.65rem; font-weight:700; margin-left:0.3rem; }
+    .dd-mono { font-family:'SF Mono',Menlo,Consolas,monospace; font-size:0.72rem; color:#93C4F5; }
+
+    .dd-cause { background:rgba(255,255,255,0.025); border:1px solid rgba(255,255,255,0.07); border-radius:10px; padding:0.9rem 1rem; }
+    .dd-cause-hd { display:flex; align-items:center; justify-content:space-between; gap:0.75rem; margin-bottom:0.55rem; flex-wrap:wrap; }
+    .dd-cause-t { font-size:0.9rem; font-weight:700; color:#fff; }
+    .dd-conf { font-size:0.66rem; font-weight:700; color:var(--uni-gray); white-space:nowrap; }
+    .dd-conf-bar { height:4px; background:rgba(255,255,255,0.07); border-radius:2px; overflow:hidden; margin-bottom:0.7rem; }
+    .dd-conf-bar span { display:block; height:100%; border-radius:2px; }
+    .dd-cause p { font-size:0.8rem; color:#C7CAD4; line-height:1.6; margin:0; }
+
+    .dd-action { background:rgba(55,173,104,0.06); border:1px solid rgba(55,173,104,0.16); border-left:3px solid;
+      border-radius:8px; padding:0.85rem 1rem; }
+    .dd-action p { font-size:0.82rem; color:#DDE0E8; line-height:1.6; margin:0; }
+
+    .dd-flow { display:flex; flex-direction:column; gap:0.1rem; }
+    .dd-step { display:flex; gap:0.8rem; padding:0.55rem 0; align-items:flex-start; position:relative; }
+    .dd-step:not(:last-child)::before { content:''; position:absolute; left:5px; top:22px; bottom:-4px; width:1px; background:rgba(255,255,255,0.12); }
+    .dd-sdot { width:11px; height:11px; border-radius:50%; flex-shrink:0; margin-top:4px; z-index:1; }
+    .dd-step.done .dd-sdot { background:#37AD68; box-shadow:0 0 0 3px rgba(55,173,104,0.16); }
+    .dd-step.wait .dd-sdot { background:#CC963F; box-shadow:0 0 0 3px rgba(204,150,63,0.18); animation:badgePulse 1.4s ease-in-out infinite; }
+    .dd-step b { display:block; font-size:0.81rem; color:#fff; font-weight:700; margin-bottom:0.12rem; }
+    .dd-step i { display:block; font-size:0.73rem; color:var(--uni-gray); font-style:normal; line-height:1.45; }
+
+    .dd-foot { margin-top:2rem; padding-top:1rem; border-top:1px solid rgba(255,255,255,0.06);
+      font-size:0.68rem; color:var(--uni-gray); text-align:center; line-height:1.6; }
+
+    @media (max-width: 768px) {
+      .use-cases-grid, .kpis, .agents-grid, .workflow-grid, .impact-grid, .charts-2col { grid-template-columns: 1fr; }
+      nav { padding: 0 1rem; }
+      .nav-links { display: none; }
+      section { padding: 3rem 1.25rem; }
+      .baic-layer { grid-template-columns: 1fr; }
+      .layer-content { border-left: none; border-top: 1px solid rgba(255,255,255,0.06); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo" style="cursor:pointer" onclick="showSection('overview')">Uniphore <span>| BAIC Platform</span></div>
+  <ul class="nav-links">
+    <li><a href="#" data-section="use-cases" onclick="showSection('use-cases');return false;">Use Cases</a></li>
+    <li><a href="#" data-section="demo" onclick="showSection('demo');return false;">Live Demo</a></li>
+    <li><a href="#" data-section="workflow" onclick="showSection('workflow');return false;">Workflows</a></li>
+    <li><a href="#" data-section="impact" onclick="showSection('impact');return false;">Business Impact</a></li>
+    <li><a href="#" data-section="baic" onclick="showSection('baic');return false;">Architecture</a></li>
+  </ul>
+  <a href="https://baic-saleseng.uniphorecloud.com/login" target="_blank" rel="noopener" class="nav-badge" style="text-decoration:none">BAIC Platform ↗</a>
+</nav>
+
+<!-- ── HERO / OVERVIEW ── -->
+<div id="overview" class="page-section section-active">
+<div class="hero">
+  <div class="hero-label">Industrial AI Intelligence</div>
+  <h1>From Sensor Data to<br>Autonomous Action</h1>
+  <p>Uniphore BAIC transforms raw industrial monitoring into intelligent, agentic workflows — detecting anomalies, optimizing performance, and driving decisions through AI-powered agents across your operations.</p>
+  <div class="hero-ctas">
+    <a href="#" onclick="showSection('demo');return false;" class="btn btn-primary">⚡ Explore Live Demo</a>
+    <a href="#" onclick="showSection('baic');return false;" class="btn btn-outline">View BAIC Architecture</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="value">4</div><div class="label">AI Layers</div></div>
+    <div class="hero-stat"><div class="value">8+</div><div class="label">Autonomous Agents</div></div>
+    <div class="hero-stat"><div class="value">24/7</div><div class="label">Continuous Monitoring</div></div>
+    <div class="hero-stat"><div class="value">2</div><div class="label">Use Cases</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ── USE CASES ── -->
+<section id="use-cases" class="page-section">
+  <div class="section-label">Two Industrial Use Cases</div>
+  <h2>What We're Solving</h2>
+  <p class="section-sub">Two critical industrial monitoring challenges — transformed from passive dashboards into intelligent, AI-driven systems powered by Uniphore BAIC.</p>
+  <div class="use-cases-grid">
+    <div class="uc-card energy">
+      <div class="uc-icon energy">⚡</div>
+      <h3>Site-Level Energy Monitoring</h3>
+      <p>A manufacturing facility with 6 main incoming power feeders and on-site solar generation. Operators struggle to identify demand peaks, track renewable contribution in real time, and automatically respond to efficiency gaps — all manually today.</p>
+      <div class="uc-tags">
+        <span class="tag tag-blue">6 Power Meters</span>
+        <span class="tag tag-green">Solar Generation</span>
+        <span class="tag tag-teal">Demand Forecasting</span>
+        <span class="tag tag-gold">Green Factor KPI</span>
+      </div>
+    </div>
+    <div class="uc-card air">
+      <div class="uc-icon air">🌬</div>
+      <h3>Compressed Air Line Monitoring</h3>
+      <p>Three industrial compressors feeding a pneumatic network with treatment stages and distribution lines. Leaks, non-productive utilization, and pressure inefficiencies silently drain energy — often going undetected for hours or days.</p>
+      <div class="uc-tags">
+        <span class="tag tag-purple">3 Compressors</span>
+        <span class="tag tag-teal">Flow & Pressure</span>
+        <span class="tag tag-blue">Leak Detection</span>
+        <span class="tag tag-gold">ISO 11011 KPIs</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DEMO SECTION ── -->
+<section id="demo" class="page-section">
+  <div class="section-label">Interactive Demo</div>
+  <h2>Use Case Deep Dive</h2>
+  <p class="section-sub">Live simulation updating every 5 seconds. Toggle feeders and compressors, filter by time range, and trigger an on-demand leak event.</p>
+
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('energy', this)">
+      <span class="tab-icon">⚡</span> Energy Monitoring
+    </button>
+    <button class="tab-btn" onclick="switchTab('air', this)">
+      <span class="tab-icon">🌬</span> Compressed Air Line
+    </button>
+  </div>
+
+  <!-- ═══ ENERGY TAB ═══ -->
+  <div id="tab-energy" class="tab-content active">
+
+    <!-- Live status bar -->
+    <div class="live-bar">
+      <div class="live-dot"></div>
+      <span class="live-status">Live</span>
+      <span class="live-clock" id="e-clock">—</span>
+      <span class="alarm-badge alarm-ok" id="e-alarm">✓ Nominal</span>
+      <div class="live-spacer"></div>
+      <div class="filter-group">
+        <span class="filter-label">History:</span>
+        <button class="f-btn range-btn active" onclick="setEnergyRange(6,this)">6H</button>
+        <button class="f-btn range-btn" onclick="setEnergyRange(12,this)">12H</button>
+        <button class="f-btn range-btn" onclick="setEnergyRange(24,this)">24H</button>
+      </div>
+      <div class="filter-group">
+        <button class="f-btn active" id="solar-toggle-btn" onclick="toggleSolarFeed()">☀ Solar</button>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpis">
+      <div class="kpi kpi-blue"><div class="kpi-label">Total Site Load</div><div class="kpi-value" id="live-e-total">— <span style="font-size:1rem;opacity:.6">kW</span></div><div class="kpi-sub">Live reading</div></div>
+      <div class="kpi kpi-green"><div class="kpi-label">Green Factor</div><div class="kpi-value" id="live-e-gf">— <span style="font-size:1rem;opacity:.6">%</span></div><div class="kpi-sub">Solar share of total load</div></div>
+      <div class="kpi kpi-teal"><div class="kpi-label">Solar Production</div><div class="kpi-value" id="live-e-solar">— <span style="font-size:1rem;opacity:.6">kW</span></div><div class="kpi-sub">Current output</div></div>
+      <div class="kpi kpi-gold"><div class="kpi-label">Net Grid Import</div><div class="kpi-value" id="live-e-net">— <span style="font-size:1rem;opacity:.6">kW</span></div><div class="kpi-sub">After solar offset</div></div>
+    </div>
+
+    <!-- 2-column live charts -->
+    <div class="charts-2col">
+      <div class="chart-card" style="margin:0">
+        <div class="chart-header">
+          <div><div class="chart-title">Live Site Power Feed</div><div class="chart-subtitle">Rolling 2-min window · scrolls right→left every 5s</div></div>
+          <div class="chart-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#599EE3"></div>Total Load</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#37AD68"></div>Solar</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#3CD0DE"></div>Net</div>
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas id="energyLiveChart"></canvas></div>
+      </div>
+      <div class="chart-card" style="margin:0">
+        <div class="chart-header"><div><div class="chart-title">Current Load Mix</div><div class="chart-subtitle">Live breakdown by feeder</div></div></div>
+        <div class="chart-wrap"><canvas id="energyMixChart"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Feeder toggles -->
+    <div class="toggle-row">
+      <span class="toggle-row-lbl">Feeders:</span>
+      <button class="t-pill" id="tp-m1" style="color:#599EE3;border-color:rgba(89,158,227,0.5)" onclick="toggleMeter(0)"><span class="pip" style="background:#599EE3"></span>M1</button>
+      <button class="t-pill" id="tp-m2" style="color:#2973C3;border-color:rgba(41,115,195,0.5)" onclick="toggleMeter(1)"><span class="pip" style="background:#2973C3"></span>M2</button>
+      <button class="t-pill" id="tp-m3" style="color:#3CD0DE;border-color:rgba(60,208,222,0.5)" onclick="toggleMeter(2)"><span class="pip" style="background:#3CD0DE"></span>M3</button>
+      <button class="t-pill" id="tp-m4" style="color:#179DAB;border-color:rgba(23,157,171,0.5)" onclick="toggleMeter(3)"><span class="pip" style="background:#179DAB"></span>M4</button>
+      <button class="t-pill" id="tp-m5" style="color:#955EBF;border-color:rgba(149,94,191,0.5)" onclick="toggleMeter(4)"><span class="pip" style="background:#955EBF"></span>M5</button>
+      <button class="t-pill" id="tp-m6" style="color:#CC963F;border-color:rgba(204,150,63,0.5)" onclick="toggleMeter(5)"><span class="pip" style="background:#CC963F"></span>M6</button>
+      <button class="t-pill" id="tp-sol" style="color:#37AD68;border-color:rgba(55,173,104,0.5)" onclick="toggleMeter(6)"><span class="pip" style="background:#37AD68"></span>Solar</button>
+    </div>
+
+    <!-- Agent event log -->
+    <div class="ev-log">
+      <div class="ev-log-hdr"><span class="live-dot" style="width:6px;height:6px"></span>Agent Detection Log — Energy</div>
+      <div id="e-events"></div>
+    </div>
+
+    <!-- Historical chart -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <div><div class="chart-title">Historical Site Profile — 22 Jun 2026</div><div class="chart-subtitle" id="e-hist-lbl">Showing 6H window</div></div>
+        <div class="chart-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#599EE3"></div>Total Load</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#37AD68"></div>Solar</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#3CD0DE"></div>Net Import</div>
+        </div>
+      </div>
+      <div class="chart-wrap"><canvas id="energyChart"></canvas></div>
+    </div>
+
+    <!-- Agents -->
+    <div class="agents-label">BAIC Agents — Energy Monitoring</div>
+    <div class="agents-grid">
+      <div class="agent-card"><div class="agent-icon" style="background:rgba(41,115,195,0.15)">⚡</div><div class="agent-body"><div class="agent-name">Energy Sentinel Agent</div><div class="agent-layer" style="color:#93C4F5">Agentic Layer · Unitary</div><div class="agent-desc">Continuously monitors all 6 power meters and solar inverter. Compares live readings to rolling 7-day baseline. Fires an alert when demand exceeds +20% of expected or when unexplained feeder imbalance is detected.</div><span class="agent-type type-unitary">Unitary Agent</span></div></div>
+      <div class="agent-card"><div class="agent-icon" style="background:rgba(55,173,104,0.15)">☀️</div><div class="agent-body"><div class="agent-name">Green Factor Optimizer</div><div class="agent-layer" style="color:#6BE39B">Model + Agentic Layers</div><div class="agent-desc">Analyzes solar production patterns vs. grid import in real time. Recommends load-shifting windows during peak solar hours. Quantifies renewable utilization gain per recommended shift action.</div><span class="agent-type type-unitary">Unitary Agent</span></div></div>
+      <div class="agent-card"><div class="agent-icon" style="background:rgba(204,150,63,0.15)">📈</div><div class="agent-body"><div class="agent-name">Peak Demand Forecaster</div><div class="agent-layer" style="color:#E8BF7D">Model + Agentic Layers</div><div class="agent-desc">Runs a 24-hour ahead demand prediction model using historical load and weather data. Sends pre-emptive alerts 2 hours before predicted peaks to enable load shedding and avoid tariff penalties.</div><span class="agent-type type-multi">Multi-Agent Workflow</span></div></div>
+      <div class="agent-card"><div class="agent-icon" style="background:rgba(101,46,139,0.15)">📊</div><div class="agent-body"><div class="agent-name">Sustainability Reporter</div><div class="agent-layer" style="color:#C6A1E3">Agentic Layer · Scheduled</div><div class="agent-desc">Autonomously generates daily and weekly energy reports: CO₂ savings from solar, cost vs. baseline, green factor trends, and feeder consumption shares. Distributes to stakeholders automatically.</div><span class="agent-type type-unitary">Unitary Agent</span></div></div>
+    </div>
+  </div>
+
+  <!-- ═══ AIR TAB ═══ -->
+  <div id="tab-air" class="tab-content">
+
+    <!-- Live status bar -->
+    <div class="live-bar" style="border-color:rgba(101,46,139,0.25);background:rgba(101,46,139,0.06)">
+      <div class="live-dot" style="background:#955EBF"></div>
+      <span class="live-status" style="color:#955EBF">Live</span>
+      <span class="live-clock" id="a-clock">—</span>
+      <span class="alarm-badge alarm-ok" id="a-alarm">✓ Nominal</span>
+      <div class="live-spacer"></div>
+      <div class="filter-group">
+        <span class="filter-label">Metric:</span>
+        <button class="m-tab active" onclick="setAirMetric('flow',this)">Flow</button>
+        <button class="m-tab" onclick="setAirMetric('pressure',this)">Pressure</button>
+        <button class="m-tab" onclick="setAirMetric('efficiency',this)">Efficiency</button>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpis">
+      <div class="kpi kpi-blue"><div class="kpi-label">Compressor Power</div><div class="kpi-value" id="live-a-power">— <span style="font-size:1rem;opacity:.6">kW</span></div><div class="kpi-sub">Total C1+C2+C3</div></div>
+      <div class="kpi kpi-teal"><div class="kpi-label">Air Flow Rate</div><div class="kpi-value" id="live-a-flow">— <span style="font-size:1rem;opacity:.6">m³/h</span></div><div class="kpi-sub">Network output</div></div>
+      <div class="kpi kpi-gold"><div class="kpi-label">System Pressure</div><div class="kpi-value" id="live-a-pressure">— <span style="font-size:1rem;opacity:.6">bar</span></div><div class="kpi-sub">Post-treatment</div></div>
+      <div class="kpi kpi-green"><div class="kpi-label">Specific Energy</div><div class="kpi-value" id="live-a-eff">— <span style="font-size:1rem;opacity:.6">kWh/m³</span></div><div class="kpi-sub">Compression efficiency</div></div>
+    </div>
+
+    <!-- 2-column live charts -->
+    <div class="charts-2col">
+      <div class="chart-card" style="margin:0">
+        <div class="chart-header">
+          <div><div class="chart-title">Live Air System Feed</div><div class="chart-subtitle">Rolling 2-min window · scrolls right→left every 5s</div></div>
+          <div class="chart-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#3CD0DE"></div>Flow (m³/h)</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#955EBF"></div>Power (kW)</div>
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas id="airLiveChart"></canvas></div>
+      </div>
+      <div class="chart-card" style="margin:0">
+        <div class="chart-header"><div><div class="chart-title">Compressor Load</div><div class="chart-subtitle">Live power per unit</div></div></div>
+        <div class="chart-wrap"><canvas id="airCompChart"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Compressor toggles + Leak Sim -->
+    <div style="display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.25rem;">
+      <div class="toggle-row" style="margin:0">
+        <span class="toggle-row-lbl">Compressors:</span>
+        <button class="t-pill" id="tp-c1" style="color:#3CD0DE;border-color:rgba(60,208,222,0.5)" onclick="toggleComp(0)"><span class="pip" style="background:#3CD0DE"></span>C1</button>
+        <button class="t-pill" id="tp-c2" style="color:#955EBF;border-color:rgba(149,94,191,0.5)" onclick="toggleComp(1)"><span class="pip" style="background:#955EBF"></span>C2</button>
+        <button class="t-pill" id="tp-c3" style="color:#CC963F;border-color:rgba(204,150,63,0.5)" onclick="toggleComp(2)"><span class="pip" style="background:#CC963F"></span>C3</button>
+      </div>
+      <div class="simulate-wrap" style="margin:0">
+        <button class="simulate-btn" id="leakSimBtn" onclick="toggleLeakSim()">🚨 Simulate Leak Event</button>
+        <span id="leakSimStatus" style="font-size:0.72rem;color:var(--uni-gray)">Inject a 440% flow spike while power holds steady</span>
+      </div>
+    </div>
+
+    <!-- Agent event log -->
+    <div class="ev-log">
+      <div class="ev-log-hdr"><span class="live-dot" style="width:6px;height:6px;background:#955EBF"></span>Agent Detection Log — Compressed Air</div>
+      <div id="a-events"></div>
+    </div>
+
+    <!-- Anomaly Alert (hidden by default) -->
+    <div class="anomaly-alert" id="anomalyAlert" style="display:none">
+      <div class="anomaly-icon">🚨</div>
+      <div>
+        <div class="anomaly-title">Leak Detection Agent — Critical Anomaly<span class="anomaly-badge">SIMULATED</span></div>
+        <div class="anomaly-body">
+          Flow rate spiked to <strong id="anomalyFlowVal">—</strong> m³/h while compressor power held at ~23 kW — a clear signature of a <strong>major downstream leak</strong>. The Leak Detection Agent has flagged this as Critical and triggered the Work Order Orchestrator for HITL review and maintenance dispatch.
+        </div>
+      </div>
+    </div>
+
+    <!-- Historical chart -->
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Compressed Air — 30 Jun to 1 Jul 2026 (48h Anomaly View)</div>
+          <div class="chart-subtitle">Compressor power vs. air flow — anomaly window highlighted in red</div>
+        </div>
+        <div class="chart-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#955EBF"></div>Compressor Power (kW)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#3CD0DE"></div>Air Flow Rate (m³/h)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#C92037;border-radius:2px"></div>Anomaly Window</div>
+        </div>
+      </div>
+      <div class="chart-wrap"><canvas id="airChart"></canvas></div>
+    </div>
+
+    <!-- Agents -->
+    <div class="agents-label">BAIC Agents — Compressed Air Line</div>
+    <div class="agents-grid">
+      <div class="agent-card">
+        <div class="agent-icon" style="background:rgba(201,32,55,0.15)">🔍</div>
+        <div class="agent-body">
+          <div class="agent-name">Leak Detection Agent</div>
+          <div class="agent-layer" style="color:#ff6b7a">Agentic + Model Layers</div>
+          <div class="agent-desc">Continuously monitors the flow-to-power ratio. At 30 Jun 20:00h, detected a 440% flow spike with no corresponding compressor ramp-up — flagged as major leak. Classified severity as Critical and triggered the orchestration workflow within 60 seconds of anomaly onset.</div>
+          <span class="agent-type type-multi">Multi-Agent Workflow</span>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon" style="background:rgba(41,115,195,0.15)">⚙️</div>
+        <div class="agent-body">
+          <div class="agent-name">Compressor Efficiency Agent</div>
+          <div class="agent-layer" style="color:#93C4F5">Model + Agentic Layers</div>
+          <div class="agent-desc">Tracks non-productive utilization: time compressors run without proportional air output. Identified that Compressor 3 accounts for &gt;95% of total output while C1 and C2 operate in low-load standby — recommends scheduling and sequencing optimization.</div>
+          <span class="agent-type type-unitary">Unitary Agent</span>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon" style="background:rgba(204,150,63,0.15)">🔮</div>
+        <div class="agent-body">
+          <div class="agent-name">Predictive Maintenance Agent</div>
+          <div class="agent-layer" style="color:#E8BF7D">Model + Agentic Layers</div>
+          <div class="agent-desc">Monitors pressure differential (before vs. after treatment), dew point trends, and compressor run-hours. Detects early signs of dryer saturation or filter clogging. Schedules maintenance windows proactively before failures impact production.</div>
+          <span class="agent-type type-unitary">Unitary Agent</span>
+        </div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-icon" style="background:rgba(101,46,139,0.15)">📋</div>
+        <div class="agent-body">
+          <div class="agent-name">Work Order Orchestrator</div>
+          <div class="agent-layer" style="color:#C6A1E3">Agentic Layer · Multi-Agent</div>
+          <div class="agent-desc">Receives escalations from Leak Detection and Maintenance agents. Generates structured work orders, routes to appropriate maintenance team, and tracks resolution status. Includes a HITL checkpoint for critical events requiring human authorization before dispatch.</div>
+          <span class="agent-type type-multi">Multi-Agent Workflow</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── WORKFLOWS ── -->
+<section id="workflow" class="page-section" style="max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem;">
+  <div class="workflow-section">
+    <div class="section-label">Multi-Agent BPMN Workflows</div>
+    <h2>From Detection to Resolution</h2>
+    <p class="section-sub" style="margin-bottom:0">Both use cases deploy multi-agent workflows with Human-in-the-Loop checkpoints, ensuring AI autonomy where safe and human oversight where critical.</p>
+    <div class="workflow-grid">
+
+      <div class="workflow-flow">
+        <div class="workflow-title">⚡ Energy Anomaly Response Workflow</div>
+        <div class="flow-step">
+          <div class="flow-node trigger">⚡</div>
+          <div class="flow-info">
+            <div class="flow-step-name">Trigger: Demand Anomaly Detected</div>
+            <div class="flow-step-desc">Energy Sentinel Agent detects >20% deviation from baseline across any feeder combination</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-node process">🧠</div>
+          <div class="flow-info">
+            <div class="flow-step-name">Root Cause Classification</div>
+            <div class="flow-step-desc">Model Layer classifies: planned load change, equipment fault, metering error, or genuine overconsumption</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-node process">📢</div>
+          <div class="flow-info">
+            <div class="flow-step-name">Stakeholder Notification</div>
+            <div class="flow-step-desc">Automated alert dispatched to energy manager with cause, severity, and recommended action</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-node hitl">👤</div>
+          <div class="flow-info">
+            <div class="flow-step-name">Human Review <span class="hitl-badge">HITL</span></div>
+            <div class="flow-step-desc">Operator confirms, dismisses, or escalates. Agent waits for approval before executing load shed actions</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-node process">⚙️</div>
+          <div class="flow-info">
+            <div class="flow-step-name">Load Optimization Action</div>
+            <div class="flow-step-desc">Green Factor Optimizer recommends and schedules load shifts; action logged to historian</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-node complete">✓</div>
+          <div class="flow-info">
+            <div class="flow-step-name">Resolution Logged & Reported</div>
+            <div class="flow-step-desc">Sustainability Reporter captures event in daily report; baseline model updated</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="workflow-flow">
+        <div class="workflow-title">🌬 Compressed Air Leak Response Workflow</div>
+        <div class="flow-step">
+          <div class="flow-node trigger">🚨</div>
+          <div class="flow-info">
+            <div class="flow-step-name">Trigger: Flow Spike Detected</div>
+            <div class="flow-step-desc">Leak Detection Agent identifies flow-to-power ratio >2× baseline standard deviation for 15+ minutes</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-node process">🧠</div>
+          <div class="flow-info">
+            <div class="flow-step-name">Severity Assessment</div>
+            <div class="flow-step-desc">Model quantifies leak magnitude, estimates energy waste per hour, and cross-references pressure drop pattern to narrow location to network zone</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-node process">📋</div>
+          <div class="flow-info">
+            <div class="flow-step-name">Work Order Generation</div>
+            <div class="flow-step-desc">Work Order Orchestrator auto-drafts maintenance ticket with: timestamp, severity, estimated loss (kWh/h), affected zone, and recommended action steps</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-node hitl">👤</div>
+          <div class="flow-info">
+            <div class="flow-step-name">Maintenance Manager Approval <span class="hitl-badge">HITL</span></div>
+            <div class="flow-step-desc">Critical events require human authorization before dispatch; manager reviews severity and approves or re-prioritizes</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-node process">🔧</div>
+          <div class="flow-info">
+            <div class="flow-step-name">Maintenance Dispatch</div>
+            <div class="flow-step-desc">Work order sent to maintenance team; Orchestrator tracks response time and real-time flow normalization</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-node complete">✓</div>
+          <div class="flow-info">
+            <div class="flow-step-name">Leak Confirmed Resolved</div>
+            <div class="flow-step-desc">Flow-to-power ratio returns to baseline; agent auto-closes ticket; total energy waste from event quantified</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── IMPACT ── -->
+<section id="impact" class="page-section">
+  <div class="section-label">Business Impact</div>
+  <h2>What BAIC Delivers</h2>
+  <p class="section-sub">AI-powered monitoring replaces reactive, manual processes with proactive, autonomous intelligence — with measurable outcomes.</p>
+  <div class="impact-grid">
+    <div class="impact-card">
+      <div class="impact-num blue">60 sec</div>
+      <div class="impact-desc"><strong>Mean time to detection</strong> for anomalies — down from hours or days of manual log review. The Leak Detection Agent identified the 30 Jun flow event within one monitoring cycle.</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num green">15–30%</div>
+      <div class="impact-desc"><strong>Typical energy savings</strong> achieved by industrial sites that deploy AI-driven demand forecasting and load shifting recommendations aligned to solar production windows.</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num teal">Zero</div>
+      <div class="impact-desc"><strong>Manual reporting effort</strong> required for daily sustainability and maintenance reports — fully automated by the Sustainability Reporter and Work Order Orchestrator agents.</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num blue">24/7</div>
+      <div class="impact-desc"><strong>Continuous autonomous monitoring</strong> across all sensors and meters — no shift gaps, no alert fatigue from manual polling, no dependency on a human operator being on-site.</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num green">HITL</div>
+      <div class="impact-desc"><strong>Human control where it matters</strong> — critical actions (load shedding, maintenance dispatch) require explicit human approval, ensuring AI autonomy never bypasses operational judgment.</div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-num teal">4 Layers</div>
+      <div class="impact-desc"><strong>End-to-end intelligence stack</strong> — from raw sensor data (Data Layer) through domain knowledge and ML models to autonomous agents — all within the unified Uniphore BAIC platform.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── BAIC ARCHITECTURE ── -->
+<section id="baic" class="page-section" style="max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem;">
+  <div class="baic-section">
+    <div class="section-label">Uniphore BAIC Framework</div>
+    <h2>Four Layers of Industrial Intelligence</h2>
+    <p class="section-sub" style="margin-bottom: 0;">BAIC connects raw sensor data to autonomous decision-making through a structured four-layer AI architecture — applied identically across both use cases.</p>
+    <div class="baic-layers">
+
+      <div class="baic-layer layer-agentic">
+        <div class="layer-label">
+          <div class="layer-name">🤖 Agentic Layer</div>
+          <div class="layer-sub">Autonomous Agents & Multi-Agent Workflows</div>
+        </div>
+        <div class="layer-content">
+          <div class="content-label">Energy Monitoring</div>
+          <div class="content-items">
+            <span class="content-chip">Energy Sentinel Agent</span>
+            <span class="content-chip">Peak Demand Alerter</span>
+            <span class="content-chip">Green Factor Optimizer</span>
+            <span class="content-chip">Sustainability Reporter</span>
+          </div>
+        </div>
+        <div class="layer-content">
+          <div class="content-label">Compressed Air</div>
+          <div class="content-items">
+            <span class="content-chip">Leak Detection Agent</span>
+            <span class="content-chip">Efficiency Monitor</span>
+            <span class="content-chip">Predictive Maintenance Agent</span>
+            <span class="content-chip">Work Order Orchestrator</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="baic-layer layer-model">
+        <div class="layer-label">
+          <div class="layer-name">🧠 Model Layer</div>
+          <div class="layer-sub">ML Models, Anomaly Detection & Forecasting</div>
+        </div>
+        <div class="layer-content">
+          <div class="content-label">Energy Monitoring</div>
+          <div class="content-items">
+            <span class="content-chip">Demand Forecasting (24h horizon)</span>
+            <span class="content-chip">Solar Yield Predictor</span>
+            <span class="content-chip">Load Anomaly Detector</span>
+          </div>
+        </div>
+        <div class="layer-content">
+          <div class="content-label">Compressed Air</div>
+          <div class="content-items">
+            <span class="content-chip">Flow/Pressure Anomaly Model</span>
+            <span class="content-chip">Energy Intensity Regressor</span>
+            <span class="content-chip">Compressor Degradation Model</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="baic-layer layer-knowledge">
+        <div class="layer-label">
+          <div class="layer-name">📚 Knowledge Layer</div>
+          <div class="layer-sub">Domain Context & Rules</div>
+        </div>
+        <div class="layer-content">
+          <div class="content-label">Energy Monitoring</div>
+          <div class="content-items">
+            <span class="content-chip">Tariff Structures</span>
+            <span class="content-chip">Energy Regulations</span>
+            <span class="content-chip">Baseline Consumption Profiles</span>
+            <span class="content-chip">Site Equipment Specs</span>
+          </div>
+        </div>
+        <div class="layer-content">
+          <div class="content-label">Compressed Air</div>
+          <div class="content-items">
+            <span class="content-chip">ISO 11011 Standards</span>
+            <span class="content-chip">Equipment Manuals</span>
+            <span class="content-chip">Maintenance Schedules</span>
+            <span class="content-chip">Pressure Thresholds</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="baic-layer layer-data">
+        <div class="layer-label">
+          <div class="layer-name">🔌 Data Layer</div>
+          <div class="layer-sub">Real-Time Sensors & Historian</div>
+        </div>
+        <div class="layer-content">
+          <div class="content-label">Energy Monitoring</div>
+          <div class="content-items">
+            <span class="content-chip">6 × Power Meters (kW, hourly)</span>
+            <span class="content-chip">Solar Inverter API</span>
+            <span class="content-chip">SCADA / Historian DB</span>
+          </div>
+        </div>
+        <div class="layer-content">
+          <div class="content-label">Compressed Air</div>
+          <div class="content-items">
+            <span class="content-chip">3 × Compressor Power Sensors</span>
+            <span class="content-chip">Flow Meter (m³/h)</span>
+            <span class="content-chip">Pressure Transducers</span>
+            <span class="content-chip">Dew Point / Temp / RH</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ BREACH DIAGNOSTIC DRAWER ══ -->
+<div id="ddScrim" onclick="closeDetail()"></div>
+<aside id="detailDrawer" aria-label="Breach diagnostic">
+  <div class="dd-head">
+    <div>
+      <div class="dd-eyebrow">BAIC Agent Diagnostic</div>
+      <div class="dd-title">Threshold Breach Investigation</div>
+    </div>
+    <button class="dd-close" onclick="closeDetail()" aria-label="Close">✕</button>
+  </div>
+  <div id="dd-body"></div>
+</aside>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">Uniphore BAIC Platform</div>
+  <p>Industrial AI Intelligence · Energy Monitoring · Compressed Air Line Monitoring</p>
+  <div class="footer-tagline">Built with the Uniphore BAIC four-layer AI framework · Demo simulation · Data sourced from real industrial monitoring deployments</div>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════
+   UNIPHORE BAIC INDUSTRIAL DEMO — INTERACTIVE JS
+   ═══════════════════════════════════════════════ */
+
+/* ─── SPA NAVIGATION ─── */
+function showSection(id) {
+  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('section-active'));
+  document.getElementById(id).classList.add('section-active');
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('nav-active', a.dataset.section === id);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (id === 'demo' && !window.demoReady) { initDemo(); window.demoReady = true; }
+}
+
+/* ─── TAB SWITCHING ─── */
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+  if (id === 'air' && !window.airReady) { initAirCharts(); window.airReady = true; }
+}
+
+/* ═══════════════════════════════════
+   LIVE SIMULATION STATE
+   ═══════════════════════════════════ */
+const POINTS = 24;          // rolling window = 24 pts × 5s = 2 minutes
+const ANOMALY_CHANCE = 0.12; // 12% chance per tick of a threshold breach
+
+const E = {
+  baseLoad: 320, baseSolar: 28,
+  hiThresh: 380, loThresh: 250,   // kW alarm band
+  meters: [45, 165, 25, 135, 15, 20],
+  solarOn: true,
+  meterVisible: [true,true,true,true,true,true,true],
+  range: 6,
+  bufLoad:[], bufSolar:[], bufNet:[], bufLabels:[], bufFlag:[], bufDetail:[]
+};
+
+const A = {
+  baseFlow: 88, basePower: 23.5,
+  hiThresh: 150, loThresh: 45,    // m³/h alarm band
+  compPower: [0.5, 2.0, 21.0],
+  basePressure: 8.3,
+  leakMode: false, leakFlow: 0,
+  metric: 'flow',
+  compVisible: [true,true,true],
+  bufFlow:[], bufPower:[], bufPressure:[], bufLabels:[], bufFlag:[], bufDetail:[],
+  bufC1:[], bufC2:[], bufC3:[]
+};
+
+/* ═══════════════════════════════════
+   ASSET REGISTRY — sensors, locations, causes
+   ═══════════════════════════════════ */
+const ASSETS = {
+  energy: [
+    { id:'PM-01', tag:'M1', meter:'Schneider PM8000', feeder:'Main Feeder 1',
+      loc:'Building A · Ground Floor · MCC Panel 1', zone:'Machining Hall',
+      serves:'CNC cells 1–8, tool room extraction',
+      bus:'11 kV / 415 V TX-1 (1250 kVA)', proto:'Modbus TCP · 1s poll' },
+    { id:'PM-02', tag:'M2', meter:'Schneider PM8000', feeder:'Main Feeder 2',
+      loc:'Building B · Level 1 · MCC Panel 2', zone:'Production Hall 1',
+      serves:'Assembly lines A/B, conveyor drives, paint booth',
+      bus:'11 kV / 415 V TX-2 (2000 kVA)', proto:'Modbus TCP · 1s poll' },
+    { id:'PM-03', tag:'M3', meter:'Socomec Diris A40', feeder:'Main Feeder 3',
+      loc:'Building B · Roof Plant Room · MCC Panel 3', zone:'HVAC Plant',
+      serves:'Chillers CH-1/CH-2, AHU bank, cooling towers',
+      bus:'415 V distribution board DB-3', proto:'Modbus RTU → gateway · 5s poll' },
+    { id:'PM-04', tag:'M4', meter:'Schneider PM8000', feeder:'Main Feeder 4',
+      loc:'Building C · Utilities Block · MCC Panel 4', zone:'Compressor Room',
+      serves:'Compressors C1–C3, dryers, chilled water pumps',
+      bus:'11 kV / 415 V TX-2 (2000 kVA)', proto:'Modbus TCP · 1s poll' },
+    { id:'PM-05', tag:'M5', meter:'Socomec Diris A40', feeder:'Main Feeder 5',
+      loc:'Building D · Warehouse Substation', zone:'Warehouse & Logistics',
+      serves:'Dock levellers, cold store, EV charge bank, lighting',
+      bus:'415 V distribution board DB-5', proto:'Modbus RTU → gateway · 5s poll' },
+    { id:'PM-06', tag:'M6', meter:'Janitza UMG 604', feeder:'Main Feeder 6',
+      loc:'Admin Block · Basement LV Room', zone:'Offices & Amenities',
+      serves:'Office HVAC, IT room UPS, canteen, external lighting',
+      bus:'415 V distribution board DB-6', proto:'Modbus TCP · 5s poll' }
+  ],
+  air: [
+    { id:'FT-201', tag:'Zone 1', meter:'Endress+Hauser Proline t-mass F300', line:'Main Distribution Header',
+      loc:'Building C · Utilities Block · Header downstream of dryer D-1', zone:'Primary Ring Main',
+      serves:'All downstream zones · 150 mm header, 8.5 bar setpoint',
+      comp:'C3 (primary, 22 kW VSD)', proto:'HART / 4–20 mA → SCADA · 1s poll' },
+    { id:'FT-202', tag:'Zone 2', meter:'SICK FTMg flow meter', line:'Machining Hall Spur',
+      loc:'Building A · Overhead run, Grid Ref C4–C9', zone:'Machining Hall',
+      serves:'CNC chuck actuation, chip blow-off, tool changers',
+      comp:'C3 via ring main', proto:'IO-Link → PLC · 1s poll' },
+    { id:'FT-203', tag:'Zone 3', meter:'Endress+Hauser Proline t-mass F300', line:'Packaging Line Distribution',
+      loc:'Building B · Level 1 · Packaging cell drop legs 1–6', zone:'Packaging & Palletising',
+      serves:'Pick-and-place grippers, case erectors, vacuum generators',
+      comp:'C3 + C2 (standby assist)', proto:'HART / 4–20 mA → SCADA · 1s poll' },
+    { id:'FT-204', tag:'Zone 4', meter:'VPFlowScope M', line:'Assembly Cell Manifold',
+      loc:'Building B · Level 1 · Assembly line A, manifold MF-A', zone:'Assembly Hall',
+      serves:'Torque tools, air blow guns, leak-test rigs',
+      comp:'C3 via ring main', proto:'Modbus RTU → gateway · 2s poll' },
+    { id:'FT-205', tag:'Zone 5', meter:'SICK FTMg flow meter', line:'Paint Booth Supply',
+      loc:'Building B · Paint shop · Regulated branch, 6 bar', zone:'Surface Treatment',
+      serves:'HVLP spray guns, booth agitators, breathing-air panel',
+      comp:'C1 (dedicated oil-free, 15 kW)', proto:'IO-Link → PLC · 1s poll' }
+  ]
+};
+
+const CAUSES = {
+  energySpike: [
+    { c:'Simultaneous large-load start', d:'Multiple high-inertia drives energised within the same 5-second window, producing a coincident inrush that pushed aggregate demand past the tariff ceiling.', conf:0.91,
+      action:'Stagger start sequence by 30s via PLC interlock; enable soft-start on the largest drive.' },
+    { c:'HVAC compressor stage-up on ambient rise', d:'Chiller staged from 1 to 3 compressors after outdoor dry-bulb crossed setpoint. Load ramp exceeded the demand-response window.', conf:0.87,
+      action:'Shift chiller stage-up to pre-cool during solar peak (12:00–14:00); raise deadband by 0.5 °C.' },
+    { c:'Unplanned production batch start', d:'Batch schedule shows an unregistered run initiated outside the approved window; MES ticket not raised.', conf:0.83,
+      action:'Escalate to production planning; require MES pre-authorisation for out-of-window batches.' },
+    { c:'Power factor collapse under reactive load', d:'PF dropped below 0.85 as inductive load rose without capacitor bank response — apparent power spiked while real work stayed flat.', conf:0.89,
+      action:'Investigate APFC panel stage 3 contactor; likely failed to switch in. Raise electrical work order.' }
+  ],
+  energyDip: [
+    { c:'Feeder trip / protection operation', d:'Sudden load loss consistent with an upstream MCCB trip. No corresponding scheduled shutdown in the maintenance calendar.', conf:0.94,
+      action:'Dispatch electrician to verify breaker status and trip cause before reclosing. Do not auto-reset.' },
+    { c:'Metering communication dropout', d:'Load reading fell to near-zero while adjacent feeders remained stable — signature of a lost Modbus poll rather than a real load change.', conf:0.88,
+      action:'Check gateway link and meter comms LED; validate against parallel CT reading before alarming.' },
+    { c:'Planned line changeover', d:'Production line entered changeover; drives coasted down as expected but the event was not flagged in the schedule feed.', conf:0.79,
+      action:'No action required — sync MES changeover calendar to suppress false positives.' },
+    { c:'Solar export offsetting grid draw', d:'Net site import dropped as PV output surged; the feeder is exporting rather than losing load.', conf:0.85,
+      action:'Informational only. Consider shifting flexible loads into this window to raise self-consumption.' }
+  ],
+  airSpike: [
+    { c:'Downstream leak — burst coupling or hose', d:'Flow rose sharply while compressor power stayed flat: the system is producing the same air but far more is escaping. Classic leak signature under ISO 11011.', conf:0.96,
+      action:'Isolate the branch and ultrasonic leak-survey drop legs. Estimated waste 6–9 kWh per hour untreated.' },
+    { c:'Failed condensate drain stuck open', d:'A timer drain has failed in the open position, venting live air continuously. Flow elevated with no pressure recovery.', conf:0.90,
+      action:'Replace drain valve with zero-loss electronic type; add drain-state monitoring to the asset register.' },
+    { c:'Unregulated blow-off / open blow gun', d:'Sustained high flow at constant pressure consistent with an open manual blow-off left unattended after shift change.', conf:0.82,
+      action:'Locate and close; fit auto-shutoff nozzles and a shift-end walk-down check.' },
+    { c:'Artificial demand from over-pressure', d:'Regulator drift raised local pressure above requirement, inflating consumption on every actuation across the zone.', conf:0.86,
+      action:'Re-set regulator to 6.2 bar; every 1 bar reduction saves roughly 7% compressor energy.' }
+  ],
+  airDip: [
+    { c:'Filter element clogged', d:'Flow fell while upstream pressure rose — differential across the filter has increased, restricting delivery to the zone.', conf:0.93,
+      action:'Replace filter element; current ΔP is beyond the 350 mbar change-out threshold.' },
+    { c:'Isolation valve partially closed', d:'Step reduction in flow with a stable pressure rise upstream indicates a throttled or partly shut isolation valve on the branch.', conf:0.88,
+      action:'Verify valve position on the drop leg; confirm no maintenance lockout is still applied.' },
+    { c:'Downstream demand genuinely idle', d:'Zone equipment is idle between production batches; low flow is expected and matches the shift pattern.', conf:0.81,
+      action:'No action. Suppress alarm during registered idle windows to reduce noise.' },
+    { c:'Dryer regeneration cycle restricting flow', d:'Desiccant dryer entered regeneration; purge air diverted, briefly reducing delivered flow to the zone.', conf:0.84,
+      action:'Informational. Confirm regeneration timing is staggered away from peak production demand.' }
+  ]
+};
+
+const pick = a => a[Math.floor(Math.random() * a.length)];
+
+function buildDetail(stream, kind, value, unit, thresh, extra) {
+  const asset = pick(ASSETS[stream]);
+  const cause = pick(CAUSES[kind]);
+  const dev = kind.includes('Spike')
+    ? `+${(value - thresh).toFixed(1)} ${unit} above ${thresh} ${unit}`
+    : `${(value - thresh).toFixed(1)} ${unit} below ${thresh} ${unit}`;
+  const pctDev = Math.abs((value - thresh) / thresh * 100).toFixed(0);
+  return {
+    stream, kind, asset, cause,
+    value: +value.toFixed(1), unit, thresh, dev, pctDev,
+    time: timeStr(),
+    date: new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' }),
+    sev: kind.includes('Spike') ? 'Critical' : 'Warning',
+    extra: extra || {},
+    wo: 'WO-' + Math.floor(100000 + Math.random() * 899999)
+  };
+}
+
+/* ═══════════════════════════════════
+   EVENT LOG — agent detections
+   ═══════════════════════════════════ */
+const EVENTS = { energy: [], air: [] };
+let EV_SEQ = 0;
+const EV_STORE = {};
+
+function logEvent(stream, sev, msg, detail) {
+  const key = 'ev' + (++EV_SEQ);
+  if (detail) EV_STORE[key] = detail;
+  EVENTS[stream].unshift({ t: timeStr(), sev, msg, key: detail ? key : null });
+  if (EVENTS[stream].length > 6) EVENTS[stream].pop();
+  renderEvents(stream);
+}
+
+function renderEvents(stream) {
+  const el = document.getElementById(stream === 'energy' ? 'e-events' : 'a-events');
+  if (!el) return;
+  const rows = EVENTS[stream];
+  el.innerHTML = rows.length ? rows.map(e =>
+    `<div class="ev-row ev-${e.sev}${e.key ? ' ev-click' : ''}"${e.key ? ` onclick="openDetail('${e.key}')" title="Click for full diagnostic"` : ''}>
+       <span class="ev-time">${e.t}</span><span class="ev-dot"></span>
+       <span class="ev-msg">${e.msg}${e.key ? '<span class="ev-more">Investigate →</span>' : ''}</span>
+     </div>`).join('')
+    : '<div class="ev-row ev-ok"><span class="ev-time">—</span><span class="ev-dot"></span><span class="ev-msg">All parameters nominal · agents monitoring</span></div>';
+}
+
+/* ═══════════════════════════════════
+   DETAIL DRAWER
+   ═══════════════════════════════════ */
+function openDetail(key) {
+  const d = typeof key === 'string' ? EV_STORE[key] : key;
+  if (!d) return;
+  const a = d.asset, c = d.cause;
+  const isE = d.stream === 'energy';
+  const crit = d.sev === 'Critical';
+  const accent = crit ? '#C92037' : '#CC963F';
+  const accentTxt = crit ? '#ff8a94' : '#E8BF7D';
+
+  const rows = (items) => items.map(([k, v]) =>
+    `<div class="dd-row"><div class="dd-k">${k}</div><div class="dd-v">${v}</div></div>`).join('');
+
+  document.getElementById('dd-body').innerHTML = `
+    <div class="dd-hero" style="border-color:${accent}55;background:linear-gradient(135deg, ${accent}18, transparent)">
+      <div class="dd-sev" style="background:${accent}22;border:1px solid ${accent}66;color:${accentTxt}">${d.sev} · Threshold Breach</div>
+      <div class="dd-val" style="color:${accentTxt}">${d.value} <span>${d.unit}</span></div>
+      <div class="dd-dev">${d.dev} &nbsp;·&nbsp; <strong>${d.pctDev}%</strong> deviation</div>
+      <div class="dd-when">${d.date} · ${d.time} &nbsp;·&nbsp; Detected in &lt;1 monitoring cycle</div>
+    </div>
+
+    <div class="dd-sec">📍 Source & Location</div>
+    ${rows([
+      ['Sensor ID', `<strong>${a.id}</strong> <span class="dd-tag">${a.tag}</span>`],
+      ['Instrument', a.meter],
+      [isE ? 'Feeder' : 'Line', a[isE ? 'feeder' : 'line']],
+      ['Physical location', a.loc],
+      ['Zone', a.zone],
+      ['Serves', a.serves],
+      [isE ? 'Supply bus' : 'Source compressor', a[isE ? 'bus' : 'comp']],
+      ['Telemetry', `<span class="dd-mono">${a.proto}</span>`]
+    ])}
+
+    <div class="dd-sec">🧠 Model Layer — Root Cause Classification</div>
+    <div class="dd-cause">
+      <div class="dd-cause-hd">
+        <span class="dd-cause-t">${c.c}</span>
+        <span class="dd-conf">${(c.conf * 100).toFixed(0)}% confidence</span>
+      </div>
+      <div class="dd-conf-bar"><span style="width:${c.conf * 100}%;background:${accent}"></span></div>
+      <p>${c.d}</p>
+    </div>
+
+    <div class="dd-sec">📊 Measurement Context</div>
+    ${rows([
+      ['Reading', `<strong>${d.value} ${d.unit}</strong>`],
+      ['Threshold', `${d.thresh} ${d.unit} (${d.kind.includes('Spike') ? 'upper' : 'lower'} alarm band)`],
+      ...Object.entries(d.extra).map(([k, v]) => [k, v]),
+      ['Detection latency', '&lt; 5 s (one polling cycle)'],
+      ['Baseline model', 'Rolling 7-day profile, same weekday & shift']
+    ])}
+
+    <div class="dd-sec">✅ Recommended Action</div>
+    <div class="dd-action" style="border-left-color:${accent}"><p>${c.action}</p></div>
+
+    <div class="dd-sec">🤖 Agentic Layer — Workflow Status</div>
+    <div class="dd-flow">
+      <div class="dd-step done"><span class="dd-sdot"></span><div><b>${isE ? 'Energy Sentinel Agent' : 'Leak Detection Agent'}</b><i>Anomaly detected on ${a.id} · severity classified</i></div></div>
+      <div class="dd-step done"><span class="dd-sdot"></span><div><b>Model Layer</b><i>Root cause classified · ${(c.conf * 100).toFixed(0)}% confidence</i></div></div>
+      <div class="dd-step done"><span class="dd-sdot"></span><div><b>${isE ? 'Peak Demand Forecaster' : 'Work Order Orchestrator'}</b><i>Ticket <span class="dd-mono">${d.wo}</span> drafted with location & action steps</i></div></div>
+      <div class="dd-step wait"><span class="dd-sdot"></span><div><b>Human Review <span class="hitl-badge">HITL</span></b><i>Awaiting operator approval before ${isE ? 'load-shed execution' : 'maintenance dispatch'}</i></div></div>
+    </div>
+
+    <div class="dd-foot">Work order <span class="dd-mono">${d.wo}</span> · Generated autonomously by Uniphore BAIC · Simulated data</div>
+  `;
+  document.getElementById('detailDrawer').classList.add('open');
+  document.getElementById('ddScrim').classList.add('open');
+}
+
+function closeDetail() {
+  document.getElementById('detailDrawer').classList.remove('open');
+  document.getElementById('ddScrim').classList.remove('open');
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+
+/* Threshold band plugin — draws hi/lo alarm lines on live charts */
+function thresholdPlugin(getHi, getLo, axisId) {
+  return {
+    id: 'thresholdBand',
+    afterDatasetsDraw(chart) {
+      const { ctx, chartArea, scales } = chart;
+      const sc = scales[axisId || 'y'];
+      if (!chartArea || !sc) return;
+      const hi = getHi(), lo = getLo();
+      [[hi, '#C92037', 'UPPER'], [lo, '#CC963F', 'LOWER']].forEach(([val, col, tag]) => {
+        const y = sc.getPixelForValue(val);
+        if (y < chartArea.top || y > chartArea.bottom) return;
+        ctx.save();
+        ctx.strokeStyle = col; ctx.lineWidth = 1; ctx.setLineDash([5, 4]); ctx.globalAlpha = 0.7;
+        ctx.beginPath(); ctx.moveTo(chartArea.left, y); ctx.lineTo(chartArea.right, y); ctx.stroke();
+        ctx.setLineDash([]); ctx.globalAlpha = 1;
+        ctx.fillStyle = col; ctx.font = '700 9px Lato, sans-serif'; ctx.textAlign = 'right';
+        ctx.fillText(tag, chartArea.right - 4, y - 4);
+        ctx.restore();
+      });
+    }
+  };
+}
+
+let energyLiveChart, energyMixChart, energyHistChart;
+let airLiveChart, airCompChart, airHistChart;
+
+function rand(base, pct) {
+  return +(base * (1 + (Math.random() - 0.5) * pct * 2)).toFixed(2);
+}
+function timeStr() {
+  return new Date().toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+}
+function shortTime(d) {
+  return d.toLocaleTimeString('en-GB', { hour:'2-digit', minute:'2-digit', second:'2-digit' });
+}
+
+function seedBuffers() {
+  const now = new Date();
+  for (let i = POINTS - 1; i >= 0; i--) {
+    const t = new Date(now - i * 5000);
+    const lbl = shortTime(t);
+    const load = rand(E.baseLoad, 0.06);
+    const solar = rand(E.baseSolar, 0.12);
+    E.bufLoad.push(+load.toFixed(1));
+    E.bufSolar.push(+solar.toFixed(1));
+    E.bufNet.push(+Math.max(0, load - solar).toFixed(1));
+    E.bufLabels.push(lbl);
+    E.bufFlag.push(0);
+    E.bufDetail.push(null);
+    const flow = rand(A.baseFlow, 0.08);
+    const pwr = rand(A.basePower, 0.05);
+    const prs = rand(A.basePressure, 0.03);
+    A.bufFlow.push(+flow.toFixed(1));
+    A.bufPower.push(+pwr.toFixed(1));
+    A.bufPressure.push(+prs.toFixed(2));
+    A.bufLabels.push(lbl);
+    A.bufFlag.push(0);
+    A.bufDetail.push(null);
+    A.bufC1.push(+rand(A.compPower[0], 0.15).toFixed(1));
+    A.bufC2.push(+rand(A.compPower[1], 0.15).toFixed(1));
+    A.bufC3.push(+rand(A.compPower[2], 0.06).toFixed(1));
+  }
+}
+
+/* Point styling — breach points render as red/gold dots */
+function ptColors(flags) {
+  return flags.map(f => f === 1 ? '#C92037' : f === -1 ? '#CC963F' : 'transparent');
+}
+function ptRadii(flags) {
+  return flags.map(f => f !== 0 ? 5 : 0);
+}
+
+function flashKpi(id, val, flag) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.firstChild.textContent = val;
+  el.classList.remove('flash', 'flash-hi', 'flash-lo');
+  void el.offsetWidth;
+  el.classList.add(flag === 1 ? 'flash-hi' : flag === -1 ? 'flash-lo' : 'flash');
+}
+
+/* ═══════════════════════════════════
+   DEMO INIT
+   ═══════════════════════════════════ */
+function initDemo() {
+  seedBuffers();
+  initEnergyLiveChart();
+  initEnergyMixChart();
+  initEnergyHistChart();
+  renderEvents('energy');
+  renderEvents('air');
+  startLiveSim();
+  const eClock = document.getElementById('e-clock');
+  if (eClock) eClock.textContent = timeStr();
+}
+
+function initAirCharts() {
+  initAirLiveChart();
+  initAirCompChart();
+  initAirHistChart();
+  renderEvents('air');
+}
+
+/* ═══════════════════════════════════
+   CHART DEFAULTS
+   ═══════════════════════════════════ */
+const TT_BASE = {
+  backgroundColor: '#2a2c35',
+  borderColor: 'rgba(255,255,255,0.1)',
+  borderWidth: 1,
+  titleColor: '#fff',
+  bodyColor: '#919399'
+};
+
+/* ═══════════════════════════════════
+   ENERGY CHARTS
+   ═══════════════════════════════════ */
+function initEnergyLiveChart() {
+  const ctx = document.getElementById('energyLiveChart').getContext('2d');
+  energyLiveChart = new Chart(ctx, {
+    type: 'line',
+    plugins: [thresholdPlugin(() => E.hiThresh, () => E.loThresh, 'y')],
+    data: {
+      labels: [...E.bufLabels],
+      datasets: [
+        { label:'Total Load', data:[...E.bufLoad], borderColor:'#599EE3', backgroundColor:'rgba(89,158,227,0.1)', borderWidth:2,
+          pointRadius: ptRadii(E.bufFlag), pointBackgroundColor: ptColors(E.bufFlag), pointBorderColor: ptColors(E.bufFlag),
+          pointHoverRadius:6, tension:0.35, fill:true },
+        { label:'Solar', data:[...E.bufSolar], borderColor:'#37AD68', backgroundColor:'rgba(55,173,104,0.1)', borderWidth:2, pointRadius:0, tension:0.35, fill:true },
+        { label:'Net Import', data:[...E.bufNet], borderColor:'#3CD0DE', backgroundColor:'transparent', borderWidth:1.5, borderDash:[5,3], pointRadius:0, tension:0.35 }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      animation: { duration: 600, easing: 'linear' },
+      interaction:{ mode:'index', intersect:false },
+      onClick: (evt, els, chart) => {
+        const pts = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
+        if (!pts.length) return;
+        const d = E.bufDetail[pts[0].index];
+        if (d) openDetail(d);
+      },
+      onHover: (evt, els, chart) => {
+        const pts = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
+        chart.canvas.style.cursor = (pts.length && E.bufDetail[pts[0].index]) ? 'pointer' : 'default';
+      },
+      plugins:{ legend:{ display:false }, tooltip:{ ...TT_BASE, callbacks:{
+        title: ([i]) => E.bufLabels[i.dataIndex],
+        label: c => {
+          const flag = E.bufFlag[c.dataIndex];
+          const tag = (c.datasetIndex === 0 && flag === 1) ? '  ⚠ ABOVE THRESHOLD'
+                    : (c.datasetIndex === 0 && flag === -1) ? '  ⚠ BELOW THRESHOLD' : '';
+          return ` ${c.dataset.label}: ${(+c.parsed.y).toFixed(1)} kW${tag}`;
+        },
+        footer: ([i]) => E.bufDetail[i.dataIndex] ? '🔍 Click for full diagnostic' : ''
+      }, footerColor:'#93C4F5', footerFont:{ size:10, weight:'700' } } },
+      scales:{
+        x:{ grid:{ color:'rgba(255,255,255,0.04)' }, ticks:{ color:'#919399', font:{ size:9 }, maxTicksLimit:7, maxRotation:0, autoSkip:true } },
+        y:{ grid:{ color:'rgba(255,255,255,0.05)' }, ticks:{ color:'#919399', font:{ size:10 }, callback: v => v+' kW' },
+            suggestedMin: E.loThresh - 40, suggestedMax: E.hiThresh + 60 }
+      }
+    }
+  });
+}
+
+function initEnergyMixChart() {
+  const ctx = document.getElementById('energyMixChart').getContext('2d');
+  energyMixChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['M1','M2','M3','M4','M5','M6','Solar'],
+      datasets: [{
+        data: [...E.meters, E.baseSolar],
+        backgroundColor: ['#599EE3','#2973C3','#3CD0DE','#179DAB','#955EBF','#CC963F','#37AD68'],
+        borderColor: '#1e2030', borderWidth: 2, hoverOffset: 6
+      }]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false, cutout:'68%',
+      plugins:{ legend:{ display:false }, tooltip:{ ...TT_BASE, callbacks:{ label: c => ` ${c.label}: ${(+c.parsed).toFixed(1)} kW` } } }
+    }
+  });
+}
+
+const energyLabels24 = ['00:00','01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00'];
+const solarProd24 = [0,0,0,0,0,0,0.5,3.2,15.8,24.1,29.4,32.7,31.6,30.2,27.9,22.4,13.1,5.8,0.8,0,0,0,0,0];
+const totalLoad24 = [
+  395.5, 330.3, 361.4, 376.6, 144.3, 252.0, 340.4, 315.6,
+  309.1, 317.6, 361.0, 373.0, 402.6, 391.9, 342.8, 335.8,
+  351.8, 359.9, 353.9, 347.1, 319.8, 269.3, 306.8, 250.5
+];
+const netLoad24 = totalLoad24.map((m, i) => Math.max(0, Math.round((m - solarProd24[i]) * 10)/10));
+
+function initEnergyHistChart() {
+  const h = E.range;
+  const si = 24 - h;
+  const ctx = document.getElementById('energyChart').getContext('2d');
+  energyHistChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: energyLabels24.slice(si),
+      datasets: [
+        { label:'Total Grid Load', data:totalLoad24.slice(si), borderColor:'#599EE3', backgroundColor:'rgba(89,158,227,0.08)', borderWidth:2, pointRadius:3, pointHoverRadius:5, tension:0.3, fill:true },
+        { label:'Solar Production', data:solarProd24.slice(si), borderColor:'#37AD68', backgroundColor:'rgba(55,173,104,0.1)', borderWidth:2, pointRadius:3, pointHoverRadius:5, tension:0.3, fill:true },
+        { label:'Net Grid Import', data:netLoad24.slice(si), borderColor:'#3CD0DE', backgroundColor:'transparent', borderWidth:2, borderDash:[6,3], pointRadius:2, tension:0.3 }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      interaction:{ mode:'index', intersect:false },
+      plugins:{ legend:{ display:false }, tooltip:{ ...TT_BASE, callbacks:{ label: c => ` ${c.dataset.label}: ${(+c.parsed.y).toFixed(1)} kW` } } },
+      scales:{
+        x:{ grid:{ color:'rgba(255,255,255,0.05)' }, ticks:{ color:'#919399', font:{ size:11 } } },
+        y:{ grid:{ color:'rgba(255,255,255,0.05)' }, ticks:{ color:'#919399', font:{ size:11 }, callback: v => v+' kW' }, title:{ display:true, text:'Power (kW)', color:'#919399', font:{ size:11 } } }
+      }
+    }
+  });
+}
+
+function setEnergyRange(h, btn) {
+  document.querySelectorAll('.range-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  E.range = h;
+  const lbl = document.getElementById('e-hist-lbl');
+  if (lbl) lbl.textContent = 'Showing ' + h + 'H window';
+  if (!energyHistChart) return;
+  const si = 24 - h;
+  energyHistChart.data.labels = energyLabels24.slice(si);
+  energyHistChart.data.datasets[0].data = totalLoad24.slice(si);
+  energyHistChart.data.datasets[1].data = solarProd24.slice(si);
+  energyHistChart.data.datasets[2].data = netLoad24.slice(si);
+  energyHistChart.update('none');
+}
+
+function toggleMeter(i) {
+  E.meterVisible[i] = !E.meterVisible[i];
+  const ids = ['tp-m1','tp-m2','tp-m3','tp-m4','tp-m5','tp-m6','tp-sol'];
+  document.getElementById(ids[i]).classList.toggle('off', !E.meterVisible[i]);
+  if (energyMixChart) {
+    energyMixChart.data.datasets[0].backgroundColor = [
+      '#599EE3','#2973C3','#3CD0DE','#179DAB','#955EBF','#CC963F','#37AD68'
+    ].map((c, idx) => E.meterVisible[idx] ? c : 'rgba(255,255,255,0.04)');
+    energyMixChart.update('none');
+  }
+}
+
+function toggleSolarFeed() {
+  E.solarOn = !E.solarOn;
+  const btn = document.getElementById('solar-toggle-btn');
+  if (btn) btn.classList.toggle('active', E.solarOn);
+  if (energyLiveChart) {
+    energyLiveChart.data.datasets[1].hidden = !E.solarOn;
+    energyLiveChart.data.datasets[2].hidden = !E.solarOn;
+    energyLiveChart.update('none');
+  }
+}
+
+/* ═══════════════════════════════════
+   AIR CHARTS
+   ═══════════════════════════════════ */
+function initAirLiveChart() {
+  const ctx = document.getElementById('airLiveChart').getContext('2d');
+  airLiveChart = new Chart(ctx, {
+    type: 'line',
+    plugins: [thresholdPlugin(() => A.metric === 'flow' ? A.hiThresh : NaN, () => A.metric === 'flow' ? A.loThresh : NaN, 'yFlow')],
+    data: {
+      labels: [...A.bufLabels],
+      datasets: [
+        { label:'Flow (m³/h)', data:[...A.bufFlow], borderColor:'#3CD0DE', backgroundColor:'rgba(60,208,222,0.08)', borderWidth:2,
+          pointRadius: ptRadii(A.bufFlag), pointBackgroundColor: ptColors(A.bufFlag), pointBorderColor: ptColors(A.bufFlag),
+          pointHoverRadius:6, tension:0.35, fill:true, yAxisID:'yFlow' },
+        { label:'Power (kW)', data:[...A.bufPower], borderColor:'#955EBF', backgroundColor:'transparent', borderWidth:2, borderDash:[5,3], pointRadius:0, tension:0.35, yAxisID:'yPwr' }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      animation: { duration: 600, easing: 'linear' },
+      interaction:{ mode:'index', intersect:false },
+      onClick: (evt, els, chart) => {
+        const pts = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
+        if (!pts.length) return;
+        const d = A.bufDetail[pts[0].index];
+        if (d) openDetail(d);
+      },
+      onHover: (evt, els, chart) => {
+        const pts = chart.getElementsAtEventForMode(evt, 'index', { intersect: false }, true);
+        chart.canvas.style.cursor = (pts.length && A.bufDetail[pts[0].index]) ? 'pointer' : 'default';
+      },
+      plugins:{ legend:{ display:false }, tooltip:{ ...TT_BASE, callbacks:{
+        title: ([i]) => A.bufLabels[i.dataIndex],
+        label: c => {
+          const flag = A.bufFlag[c.dataIndex];
+          const tag = (c.datasetIndex === 0 && flag === 1) ? '  ⚠ LEAK SIGNATURE'
+                    : (c.datasetIndex === 0 && flag === -1) ? '  ⚠ FLOW STARVATION' : '';
+          return ` ${c.dataset.label}: ${(+c.parsed.y).toFixed(2)}${tag}`;
+        },
+        footer: ([i]) => A.bufDetail[i.dataIndex] ? '🔍 Click for full diagnostic' : ''
+      }, footerColor:'#C6A1E3', footerFont:{ size:10, weight:'700' } } },
+      scales:{
+        x:{ grid:{ color:'rgba(255,255,255,0.04)' }, ticks:{ color:'#919399', font:{ size:9 }, maxTicksLimit:7, maxRotation:0, autoSkip:true } },
+        yFlow:{ position:'left', grid:{ color:'rgba(255,255,255,0.05)' }, ticks:{ color:'#3CD0DE', font:{ size:10 }, callback: v => v+' m³/h' } },
+        yPwr:{ position:'right', grid:{ display:false }, ticks:{ color:'#955EBF', font:{ size:10 }, callback: v => v+' kW' }, suggestedMin:0, suggestedMax:40 }
+      }
+    }
+  });
+}
+
+function initAirCompChart() {
+  const ctx = document.getElementById('airCompChart').getContext('2d');
+  airCompChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['C1 – Auxiliary','C2 – Secondary','C3 – Primary'],
+      datasets: [{
+        label: 'Power (kW)',
+        data: [...A.compPower],
+        backgroundColor: ['rgba(60,208,222,0.45)','rgba(149,94,191,0.45)','rgba(204,150,63,0.45)'],
+        borderColor: ['#3CD0DE','#955EBF','#CC963F'],
+        borderWidth: 1.5, borderRadius: 4
+      }]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false, indexAxis:'y',
+      plugins:{ legend:{ display:false }, tooltip:{ ...TT_BASE, callbacks:{ label: c => ` ${(+c.parsed.x).toFixed(1)} kW` } } },
+      scales:{
+        x:{ grid:{ color:'rgba(255,255,255,0.05)' }, ticks:{ color:'#919399', font:{ size:10 }, callback: v => v+' kW' } },
+        y:{ grid:{ display:false }, ticks:{ color:'#919399', font:{ size:10 } } }
+      }
+    }
+  });
+}
+
+function initAirHistChart() {
+  const airLabels = [
+    '30/6 00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19',
+    '20★','21★','22★','23★','1/7 00★','01★','02★','03★','04★','05★','06',
+    '07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23'
+  ];
+  const compPower = [
+    24.862,22.773,22.374,21.673,20.968,47.054,23.357,29.058,52.558,26.261,80.955,67.344,
+    56.856,39.857,23.655,25.960,51.764,53.956,21.157,23.256,
+    22.852,23.254,23.760,22.853,21.970,23.572,24.273,22.069,21.665,23.255,
+    23.957,30.159,71.058,45.854,45.457,23.066,22.255,22.963,67.859,79.358,22.357,23.758,23.561,27.562,21.679,23.074,23.578,23.972
+  ].map(v => Math.round(v * 10) / 10);
+  const airFlow = [
+    81.1,73.7,72.3,89.5,86.7,108.4,79.7,90.9,127.7,88.0,148.6,61.3,72.5,120.6,73.1,82.0,145.6,154.5,70.1,76.4,
+    347.7,466.7,545.1,313.4,227.5,168.4,596.5,593.3,600.1,540.3,
+    88.2,126.8,222.2,126.1,152.5,85.2,80.8,81.3,199.9,236.6,75.5,78.3,81.9,101.9,97.0,101.9,102.0,101.3
+  ];
+  const anomalyStart = 20, anomalyEnd = 29;
+  const anomalyPlugin = {
+    id: 'anomalyHighlight',
+    beforeDraw(chart) {
+      const { ctx, chartArea, scales } = chart;
+      if (!chartArea) return;
+      const x0 = scales.x.getPixelForValue(anomalyStart);
+      const x1 = scales.x.getPixelForValue(anomalyEnd);
+      ctx.save();
+      ctx.fillStyle = 'rgba(201,32,55,0.08)';
+      ctx.fillRect(x0, chartArea.top, x1 - x0, chartArea.bottom - chartArea.top);
+      ctx.strokeStyle = 'rgba(201,32,55,0.3)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 3]);
+      ctx.beginPath(); ctx.moveTo(x0, chartArea.top); ctx.lineTo(x0, chartArea.bottom); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x1, chartArea.top); ctx.lineTo(x1, chartArea.bottom); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = 'rgba(201,32,55,0.85)';
+      ctx.font = '600 10px Lato, sans-serif';
+      ctx.fillText('LEAK ANOMALY', x0 + 6, chartArea.top + 14);
+      ctx.restore();
+    }
+  };
+  const ctx = document.getElementById('airChart').getContext('2d');
+  airHistChart = new Chart(ctx, {
+    type: 'line',
+    plugins: [anomalyPlugin],
+    data: {
+      labels: airLabels,
+      datasets: [
+        { label:'Compressor Power (kW)', data:compPower, borderColor:'#955EBF', backgroundColor:'rgba(101,46,139,0.1)', borderWidth:2, pointRadius:2, tension:0.3, fill:true, yAxisID:'yPower' },
+        { label:'Air Flow Rate (m³/h)', data:airFlow, borderColor:'#3CD0DE', backgroundColor:'rgba(60,208,222,0.06)', borderWidth:2, pointRadius:2, tension:0.3, fill:true, yAxisID:'yFlow' }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      interaction:{ mode:'index', intersect:false },
+      plugins:{ legend:{ display:false }, tooltip:{ ...TT_BASE, callbacks:{
+        title: ([item]) => airLabels[item.dataIndex].replace('★',' ⚠'),
+        label: c => { const s = c.datasetIndex === 0 ? ' kW' : ' m³/h'; return ` ${c.dataset.label}: ${(+c.parsed.y).toFixed(1)}${s}`; }
+      } } },
+      scales:{
+        x:{ grid:{ color:'rgba(255,255,255,0.04)' }, ticks:{ color: c => (c.index >= anomalyStart && c.index <= anomalyEnd) ? '#ff6b7a' : '#919399', font:{ size:10 }, maxRotation:60, maxTicksLimit:24 } },
+        yPower:{ position:'left', grid:{ color:'rgba(255,255,255,0.05)' }, ticks:{ color:'#955EBF', font:{ size:10 }, callback: v => v+' kW' }, title:{ display:true, text:'Power (kW)', color:'#955EBF', font:{ size:10 } } },
+        yFlow:{ position:'right', grid:{ display:false }, ticks:{ color:'#3CD0DE', font:{ size:10 }, callback: v => v+' m³/h' }, title:{ display:true, text:'Flow (m³/h)', color:'#3CD0DE', font:{ size:10 } } }
+      }
+    }
+  });
+}
+
+function toggleComp(i) {
+  A.compVisible[i] = !A.compVisible[i];
+  const ids = ['tp-c1','tp-c2','tp-c3'];
+  document.getElementById(ids[i]).classList.toggle('off', !A.compVisible[i]);
+  if (airCompChart) {
+    airCompChart.data.datasets[0].backgroundColor = [
+      'rgba(60,208,222,0.45)','rgba(149,94,191,0.45)','rgba(204,150,63,0.45)'
+    ].map((c, idx) => A.compVisible[idx] ? c : 'rgba(255,255,255,0.04)');
+    airCompChart.data.datasets[0].borderColor = [
+      '#3CD0DE','#955EBF','#CC963F'
+    ].map((c, idx) => A.compVisible[idx] ? c : 'rgba(255,255,255,0.06)');
+    airCompChart.update('none');
+  }
+}
+
+function toggleLeakSim() {
+  A.leakMode = !A.leakMode;
+  const btn = document.getElementById('leakSimBtn');
+  const status = document.getElementById('leakSimStatus');
+  const alert = document.getElementById('anomalyAlert');
+  if (A.leakMode) {
+    btn.classList.add('running');
+    btn.textContent = '✕ Stop Leak Simulation';
+    if (status) { status.textContent = '⚠ Leak active — watch Flow spike in live chart'; status.style.color = '#ff6b7a'; }
+    if (alert) alert.style.display = 'flex';
+    A.leakFlow = A.baseFlow;
+    logEvent('air', 'crit', 'Leak Detection Agent: <b>sustained leak event initiated</b> — escalating to Work Order Orchestrator (HITL pending).');
+  } else {
+    btn.classList.remove('running');
+    btn.textContent = '🚨 Simulate Leak Event';
+    if (status) { status.textContent = 'Inject a 440% flow spike while power holds steady'; status.style.color = 'var(--uni-gray)'; }
+    if (alert) alert.style.display = 'none';
+    A.leakFlow = 0;
+    logEvent('air', 'ok', 'Work Order Orchestrator: leak resolved — flow-to-power ratio back within baseline. Ticket auto-closed.');
+  }
+}
+
+function setAirMetric(metric, btn) {
+  document.querySelectorAll('.m-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  A.metric = metric;
+  if (!airLiveChart) return;
+  if (metric === 'flow') {
+    airLiveChart.data.datasets[0].label = 'Flow (m³/h)';
+    airLiveChart.data.datasets[0].data = [...A.bufFlow];
+    airLiveChart.data.datasets[0].borderColor = '#3CD0DE';
+    airLiveChart.data.datasets[0].backgroundColor = 'rgba(60,208,222,0.08)';
+    airLiveChart.options.scales.yFlow.ticks.callback = v => v+' m³/h';
+    airLiveChart.options.scales.yFlow.ticks.color = '#3CD0DE';
+  } else if (metric === 'pressure') {
+    airLiveChart.data.datasets[0].label = 'Pressure (bar)';
+    airLiveChart.data.datasets[0].data = [...A.bufPressure];
+    airLiveChart.data.datasets[0].borderColor = '#CC963F';
+    airLiveChart.data.datasets[0].backgroundColor = 'rgba(204,150,63,0.08)';
+    airLiveChart.options.scales.yFlow.ticks.callback = v => (+v).toFixed(2)+' bar';
+    airLiveChart.options.scales.yFlow.ticks.color = '#CC963F';
+  } else {
+    const eff = A.bufPower.map((p, i) => A.bufFlow[i] > 0 ? +(p/A.bufFlow[i]).toFixed(4) : 0);
+    airLiveChart.data.datasets[0].label = 'Spec. Energy (kWh/m³)';
+    airLiveChart.data.datasets[0].data = eff;
+    airLiveChart.data.datasets[0].borderColor = '#37AD68';
+    airLiveChart.data.datasets[0].backgroundColor = 'rgba(55,173,104,0.08)';
+    airLiveChart.options.scales.yFlow.ticks.callback = v => (+v).toFixed(4);
+    airLiveChart.options.scales.yFlow.ticks.color = '#37AD68';
+  }
+  airLiveChart.update('none');
+}
+
+/* ═══════════════════════════════════
+   LIVE UPDATE LOOP — every 5s
+   ═══════════════════════════════════ */
+function updateLive() {
+  const now = new Date();
+  const lbl = shortTime(now);
+
+  /* ═══ ENERGY ═══ */
+  let newLoad, eFlag = 0, eDetail = null;
+  const eRoll = Math.random();
+  const newSolarPre = rand(E.baseSolar, 0.12);
+  if (eRoll < ANOMALY_CHANCE * 0.6) {
+    // SPIKE — demand surge above upper threshold
+    newLoad = E.hiThresh + 15 + Math.random() * 85;
+    eFlag = 1;
+    eDetail = buildDetail('energy', 'energySpike', newLoad, 'kW', E.hiThresh, {
+      'Solar offset at event': `${newSolarPre.toFixed(1)} kW`,
+      'Net grid import': `${Math.max(0, newLoad - newSolarPre).toFixed(1)} kW`,
+      'Est. tariff exposure': `£${(((newLoad - E.hiThresh) * 0.18) + 42).toFixed(2)} demand charge if sustained 15 min`,
+      'Site 7-day baseline': `${E.baseLoad} kW ± 6%`
+    });
+    logEvent('energy', 'crit',
+      `Energy Sentinel: demand spike <b>${newLoad.toFixed(0)} kW</b> on <b>${eDetail.asset.id}</b> (${eDetail.asset.zone}) — exceeds ${E.hiThresh} kW limit.`, eDetail);
+  } else if (eRoll < ANOMALY_CHANCE) {
+    // DIP — sudden load drop below lower threshold
+    newLoad = E.loThresh - 10 - Math.random() * 60;
+    eFlag = -1;
+    eDetail = buildDetail('energy', 'energyDip', newLoad, 'kW', E.loThresh, {
+      'Solar offset at event': `${newSolarPre.toFixed(1)} kW`,
+      'Load lost vs baseline': `${(E.baseLoad - newLoad).toFixed(1)} kW (${((E.baseLoad - newLoad) / E.baseLoad * 100).toFixed(0)}%)`,
+      'Adjacent feeders': 'Stable — no correlated drop detected',
+      'Site 7-day baseline': `${E.baseLoad} kW ± 6%`
+    });
+    logEvent('energy', 'warn',
+      `Energy Sentinel: load dip <b>${newLoad.toFixed(0)} kW</b> on <b>${eDetail.asset.id}</b> (${eDetail.asset.zone}) — below ${E.loThresh} kW.`, eDetail);
+  } else {
+    newLoad = rand(E.baseLoad, 0.06);
+  }
+  const newSolar = newSolarPre;
+  const newNet = Math.max(0, newLoad - newSolar);
+
+  E.bufLoad.push(+newLoad.toFixed(1)); E.bufLoad.shift();
+  E.bufSolar.push(+newSolar.toFixed(1)); E.bufSolar.shift();
+  E.bufNet.push(+newNet.toFixed(1)); E.bufNet.shift();
+  E.bufLabels.push(lbl); E.bufLabels.shift();
+  E.bufFlag.push(eFlag); E.bufFlag.shift();
+  E.bufDetail.push(eDetail); E.bufDetail.shift();
+
+  const gf = Math.round(newSolar / newLoad * 100);
+  flashKpi('live-e-total', newLoad.toFixed(0), eFlag);
+  flashKpi('live-e-gf', gf.toString(), 0);
+  flashKpi('live-e-solar', newSolar.toFixed(1), 0);
+  flashKpi('live-e-net', newNet.toFixed(1), 0);
+
+  const eBadge = document.getElementById('e-alarm');
+  if (eBadge) {
+    eBadge.textContent = eFlag === 1 ? '⚠ HIGH DEMAND' : eFlag === -1 ? '⚠ LOW LOAD' : '✓ NOMINAL';
+    eBadge.className = 'alarm-badge ' + (eFlag !== 0 ? 'alarm-on' : 'alarm-ok');
+  }
+
+  if (energyLiveChart) {
+    energyLiveChart.data.labels = [...E.bufLabels];
+    const d0 = energyLiveChart.data.datasets[0];
+    d0.data = [...E.bufLoad];
+    d0.pointRadius = ptRadii(E.bufFlag);
+    d0.pointBackgroundColor = ptColors(E.bufFlag);
+    d0.pointBorderColor = ptColors(E.bufFlag);
+    energyLiveChart.data.datasets[1].data = [...E.bufSolar];
+    energyLiveChart.data.datasets[2].data = [...E.bufNet];
+    energyLiveChart.update();
+  }
+  if (energyMixChart) {
+    const scale = newLoad / E.baseLoad;
+    energyMixChart.data.datasets[0].data = E.meters.map(m => +rand(m * scale, 0.08).toFixed(1)).concat([+newSolar.toFixed(1)]);
+    energyMixChart.update('none');
+  }
+  const eClock = document.getElementById('e-clock');
+  if (eClock) eClock.textContent = timeStr();
+
+  /* ═══ AIR ═══ */
+  let newFlow, newPwr, newPrs, aFlag = 0, aDetail = null;
+  if (A.leakMode) {
+    A.leakFlow = Math.min((A.leakFlow || 0) + 45, 480);
+    newFlow = rand(A.leakFlow, 0.06);
+    newPwr = rand(A.basePower, 0.03);
+    newPrs = rand(A.basePressure - 0.9, 0.04);
+    aFlag = 1;
+    const afv = document.getElementById('anomalyFlowVal');
+    if (afv) afv.textContent = newFlow.toFixed(0);
+    if (!A.simDetail) {
+      A.simDetail = buildDetail('air', 'airSpike', newFlow, 'm³/h', A.hiThresh, {
+        'Compressor power': `${newPwr.toFixed(1)} kW (flat — no ramp-up)`,
+        'System pressure': `${newPrs.toFixed(2)} bar (${(A.basePressure - newPrs).toFixed(2)} bar drop)`,
+        'Flow-to-power ratio': `${(newFlow / newPwr).toFixed(1)} m³/kWh vs ${(A.baseFlow / A.basePower).toFixed(1)} baseline`,
+        'Est. energy waste': `${((newFlow - A.baseFlow) * 0.11).toFixed(1)} kWh/h`,
+        'Est. annual cost': `£${(((newFlow - A.baseFlow) * 0.11) * 6000 * 0.16).toFixed(0)} if left unrepaired`,
+        'Event type': 'Operator-triggered simulation (sustained)'
+      });
+    }
+    aDetail = A.simDetail;
+  } else {
+    A.simDetail = null;
+    const aRoll = Math.random();
+    if (aRoll < ANOMALY_CHANCE * 0.6) {
+      // SPIKE — leak signature: flow jumps, power flat
+      newFlow = A.hiThresh + 20 + Math.random() * 180;
+      newPwr = rand(A.basePower, 0.03);
+      newPrs = rand(A.basePressure - 0.5, 0.04);
+      aFlag = 1;
+      aDetail = buildDetail('air', 'airSpike', newFlow, 'm³/h', A.hiThresh, {
+        'Compressor power': `${newPwr.toFixed(1)} kW (flat — no ramp-up)`,
+        'System pressure': `${newPrs.toFixed(2)} bar (${(A.basePressure - newPrs).toFixed(2)} bar drop)`,
+        'Flow-to-power ratio': `${(newFlow / newPwr).toFixed(1)} m³/kWh vs ${(A.baseFlow / A.basePower).toFixed(1)} baseline`,
+        'Est. energy waste': `${((newFlow - A.baseFlow) * 0.11).toFixed(1)} kWh/h`,
+        'Est. annual cost': `£${(((newFlow - A.baseFlow) * 0.11) * 6000 * 0.16).toFixed(0)} if left unrepaired`,
+        'ISO 11011 classification': 'Category 1 — significant leak, immediate action'
+      });
+      logEvent('air', 'crit',
+        `Leak Detection Agent: flow <b>${newFlow.toFixed(0)} m³/h</b> on <b>${aDetail.asset.id}</b> (${aDetail.asset.zone}) vs ${newPwr.toFixed(1)} kW flat power — leak signature.`, aDetail);
+    } else if (aRoll < ANOMALY_CHANCE) {
+      // DIP — flow starvation / blockage
+      newFlow = A.loThresh - 5 - Math.random() * 25;
+      newPwr = rand(A.basePower, 0.05);
+      newPrs = rand(A.basePressure + 0.4, 0.03);
+      aFlag = -1;
+      aDetail = buildDetail('air', 'airDip', newFlow, 'm³/h', A.loThresh, {
+        'Compressor power': `${newPwr.toFixed(1)} kW (unchanged)`,
+        'System pressure': `${newPrs.toFixed(2)} bar (<b>rising</b> — +${(newPrs - A.basePressure).toFixed(2)} bar)`,
+        'Filter ΔP (est.)': `${(380 + Math.random() * 160).toFixed(0)} mbar — above 350 mbar change-out limit`,
+        'Flow vs baseline': `${((1 - newFlow / A.baseFlow) * 100).toFixed(0)}% reduction`,
+        'Downstream risk': 'Actuator cycle times may extend; leak-test rigs affected first'
+      });
+      logEvent('air', 'warn',
+        `Predictive Maintenance: flow starvation <b>${newFlow.toFixed(0)} m³/h</b> on <b>${aDetail.asset.id}</b> (${aDetail.asset.zone}) with rising pressure.`, aDetail);
+    } else {
+      newFlow = rand(A.baseFlow, 0.08);
+      newPwr = rand(A.basePower, 0.05);
+      newPrs = rand(A.basePressure, 0.03);
+    }
+  }
+  const newEff = newFlow > 0 ? (newPwr / newFlow) : 0;
+  const c1 = +rand(A.compPower[0], 0.15).toFixed(1);
+  const c2 = +rand(A.compPower[1], 0.15).toFixed(1);
+  const c3 = +rand(A.compPower[2], 0.06).toFixed(1);
+
+  A.bufFlow.push(+newFlow.toFixed(1)); A.bufFlow.shift();
+  A.bufPower.push(+newPwr.toFixed(1)); A.bufPower.shift();
+  A.bufPressure.push(+newPrs.toFixed(2)); A.bufPressure.shift();
+  A.bufLabels.push(lbl); A.bufLabels.shift();
+  A.bufFlag.push(aFlag); A.bufFlag.shift();
+  A.bufDetail.push(aDetail); A.bufDetail.shift();
+  A.bufC1.push(c1); A.bufC1.shift();
+  A.bufC2.push(c2); A.bufC2.shift();
+  A.bufC3.push(c3); A.bufC3.shift();
+
+  flashKpi('live-a-power', newPwr.toFixed(1), 0);
+  flashKpi('live-a-flow', newFlow.toFixed(0), aFlag);
+  flashKpi('live-a-pressure', newPrs.toFixed(2), 0);
+  flashKpi('live-a-eff', newEff.toFixed(4), 0);
+
+  const aBadge = document.getElementById('a-alarm');
+  if (aBadge) {
+    aBadge.textContent = aFlag === 1 ? '⚠ LEAK SIGNATURE' : aFlag === -1 ? '⚠ FLOW STARVED' : '✓ NOMINAL';
+    aBadge.className = 'alarm-badge ' + (aFlag !== 0 ? 'alarm-on' : 'alarm-ok');
+  }
+
+  const aClock = document.getElementById('a-clock');
+  if (aClock) aClock.textContent = timeStr();
+
+  if (airLiveChart) {
+    airLiveChart.data.labels = [...A.bufLabels];
+    const d0 = airLiveChart.data.datasets[0];
+    d0.data = A.metric === 'pressure'
+      ? [...A.bufPressure]
+      : A.metric === 'efficiency'
+        ? A.bufPower.map((p, i) => A.bufFlow[i] > 0 ? +(p/A.bufFlow[i]).toFixed(4) : 0)
+        : [...A.bufFlow];
+    const showPts = A.metric === 'flow';
+    d0.pointRadius = showPts ? ptRadii(A.bufFlag) : 0;
+    d0.pointBackgroundColor = showPts ? ptColors(A.bufFlag) : 'transparent';
+    d0.pointBorderColor = showPts ? ptColors(A.bufFlag) : 'transparent';
+    airLiveChart.data.datasets[1].data = [...A.bufPower];
+    airLiveChart.update();
+  }
+  if (airCompChart) {
+    airCompChart.data.datasets[0].data = [c1, c2, c3];
+    airCompChart.update('none');
+  }
+}
+
+function startLiveSim() {
+  updateLive();
+  setInterval(updateLive, 5000);
+}
+
+  /* legacy functions removed — replaced by initEnergyHistChart / initAirHistChart above */
+  function initEnergyChart() { /* no-op */ }
+  function initAirChart() { /* no-op */ }
+
+</script>
